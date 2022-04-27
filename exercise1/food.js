@@ -42,14 +42,14 @@ function cookPrimalArray(array) {
 
 console.log(cookPrimalArray(['🐄', '🐔', '🌽', '🍠']));
 
-function hasVeggieFood(array = []) {
+function hasVeggieFood(array) {
   let veg = '🍟' || '🍿';
   return array.some((value, index, arr) => arr.filter((c) => c == veg));
 }
 
 console.log('Has veggie? ', hasVeggieFood(['🐄', '🐔', '🌽', '🍠']));
 
-function hasFlesh(array = []) {
+function hasFlesh(array) {
   let flesh = '🍗' || '🍔';
   return array.some((value, index, arr) => arr.filter((c) => c == flesh));
 }

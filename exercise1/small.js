@@ -21,9 +21,22 @@ console.log(sumSquares([0, 1, 2, 3, 4]));
 
 // 3
 function filterNotNumberValue(array = []) {
-  return array.filter((i) => i > 0 || i < 0);
+  return array.filter((i) => i);
 }
 
 console.log(
   filterNotNumberValue([NaN, 0, 15, false, -22, '', undefined, 47, null])
+);
+
+console.log([1, 2, 3, 4].map((number, index) => ({ [index]: number })));
+
+console.log(
+  [1, 2, 4, 7, 4, 2, 1].reduce(
+    (prev, curr, index, arr) =>
+      arr.filter((i) => i === prev).length <
+      arr.filter((i) => i === curr).length
+        ? prev
+        : curr,
+    2
+  )
 );
