@@ -8,16 +8,7 @@ alert(alert(1) && alert(2)); //3. Shows two alerts, first with value 1 and then 
 
 alert(null || (2 && 3) || 4); //4. Shows one alert with the value 3.
 
-function verifyAge(age) {
-  if (age >= 14 && age <= 90) {
-    return true;
-  }
-  if (Math.floor(age) <= 6 || Math.floor(age) >= 45) {
-    return false;
-  }
-  return verifyAge(age / 2);
-}
-console.log(verifyAge(91));
+const verifyAge = (age) => age >= 14 === age <= 90;
 
 alert(alert(null) ?? null ?? 2 ?? alert(3)); //6. Shows two alerts, first with the value null ant then with value 2.
 
