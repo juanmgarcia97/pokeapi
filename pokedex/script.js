@@ -300,10 +300,15 @@ class Pokedex extends HTMLElement {
 // const responseApi = Promise.resolve.then();
 // console.log(test);
 dataPokemons.results.forEach((pokemon, index) => {
+  let color = pokemonColorMap[index + 1];
   let pokeElement = document.createElement("poke-card");
   pokeElement.setAttribute("image", getPokemonImageUri(index + 1));
   pokeElement.setAttribute("name", pokemon.name);
-  pokeElement.setAttribute("color", pokemonColorMap[index + 1]);
+  pokeElement.setAttribute("color", color);
+  pokeElement.setAttribute(
+    "style",
+    `color: ${color.split("#")[1].startsWith("f") ? "black" : "white"}`
+  );
   document.getElementById("pokedex").appendChild(pokeElement);
 });
 customElements.define("poke-card", Pokedex);
