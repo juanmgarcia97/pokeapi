@@ -1,5 +1,31 @@
 #pokedex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  grid-area: main;
+}
+
+.header {
+    grid-area: header;
+    min-height: 100px;
+    margin: 0.5rem 0;
+
+}
+
+.header>img {
+    height: 100px;
+    width: 300px;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+.main-page {
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    '. main .'
+    'footer footer footer';
 }

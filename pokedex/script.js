@@ -182,14 +182,14 @@ class Pokedex extends HTMLElement {
   }
 }
 
-fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20')
+fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=40')
 .then(async res => {
   const data = await res.json()
   const pokemons = data.results
   pokemons.forEach((pokemon, index) => {
-    let color = pokemonColorMap[index + 21];
+    let color = pokemonColorMap[index + 1];
     let pokeElement = document.createElement("poke-card");
-    pokeElement.setAttribute("image", getPokemonImageUri(index + 21));
+    pokeElement.setAttribute("image", getPokemonImageUri(index + 1));
     pokeElement.setAttribute("name", pokemon.name);
     pokeElement.setAttribute("color", color);
     pokeElement.setAttribute(

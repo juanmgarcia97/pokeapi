@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pokedex</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
+  <body>
+    <div class="main-page">
+      <header class="header">
+        <img
+          src="https://images-test.gamespress.com/Content/Artwork/NickNack/PokemonAmerica/artwork/2019/07/09125735-7b00e266-d991-41da-9267-843e49ce62a7/Pokemon_Logo.jpg?w=240&mode=max&otf=y&quality=90&format=jpg&bgcolor=white&ex=2022-07-01+03%3A00%3A00&sky=2bb1925e60ca84fb6f07c610e9657b6c8cfbb865c79518de24f3fb3b6df62220"
+          alt=""
+        />
+      </header>
+      <div id="pokedex"></div>
+      <template id="poke-card">
+        <style>
+          .container {
+            border-radius: 5px;
+            width: fit-content;
+            height: fit-content;
+          }
 
-<body>
-  <div id="pokedex"></div>
-  <template id="poke-card">
-    <style>
-      .container {
-        border-radius: 5px;
-        width: fit-content;
-        height: fit-content;
-      }
+          .image {
+            width: 150px;
+            height: 150px;
+          }
 
-      .image {
-        width: 150px;
-        height: 150px;
-      }
-
-      .name {
-        text-transform: capitalize;
-        text-align: center;
-        padding: 5px;
-      }
-    </style>
-    <div class="container">
-      <img src="" class="image">
-      <p class="name"></p>
+          .name {
+            text-transform: capitalize;
+            text-align: center;
+            padding: 5px;
+          }
+        </style>
+        <div class="container">
+          <img src="" class="image" />
+          <p class="name"></p>
+        </div>
+      </template>
+      <footer class="footer">Footer</footer>
     </div>
-  </template>
-</body>
-<script src="./script.js"></script>
-
+  </body>
+  <script src="./script.js"></script>
 </html>
