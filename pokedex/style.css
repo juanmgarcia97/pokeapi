@@ -20,6 +20,19 @@
 
 .footer {
     grid-area: footer;
+    min-height: 50px;
+    justify-content: start;
+}
+
+.divider {
+  border-top: 1.5px solid black;
+}
+
+.footer>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 }
 
 .main-page {
