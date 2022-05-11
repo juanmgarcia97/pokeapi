@@ -1,0 +1,42 @@
+@my-header: header;
+@my-main: main;
+@my-footer: footer;
+
+#pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  grid-area: @my-main;
+}
+
+.@{my-header} {
+  grid-area: @my-header;
+  min-height: 100px;
+  margin: 0.5rem 0;
+  img {
+    height: 100px;
+    width: 300px;
+  }
+}
+
+.@{my-footer} {
+  grid-area: @my-footer;
+  min-height: 50px;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.main-page {
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    '. main .'
+    'footer footer footer';
+  .divider {
+    border-top: 1.5px solid black;
+  }
+}

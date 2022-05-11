@@ -4,6 +4,7 @@
   justify-content: space-evenly;
   gap: 0.5rem;
   grid-area: main;
+  font-family: sans-serif;
 }
 
 .header {
