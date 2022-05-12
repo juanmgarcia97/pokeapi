@@ -2,6 +2,18 @@
 @my-main: main;
 @my-footer: footer;
 
+.main-page {
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    '. main .'
+    'footer footer footer';
+    font-family: sans-serif;
+  .divider {
+    border-top: 1.5px solid black;
+  }
+}
+
 #pokedex {
   display: flex;
   flex-wrap: wrap;
@@ -30,13 +42,3 @@
   }
 }
 
-.main-page {
-  display: grid;
-  grid-template-areas:
-    'header header header'
-    '. main .'
-    'footer footer footer';
-  .divider {
-    border-top: 1.5px solid black;
-  }
-}
