@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
+var inject = require('gulp-inject');
 const { series } = require('gulp');
 
 function cleanTask(cb) {
@@ -29,4 +30,15 @@ function uglifyCss(cb) {
   cb();
 }
 
-exports.default = series(cleanTask, uglifyJs, uglifyCss);
+function injectFiles(cb) {
+  var css = gulp.src('dist/**/*.css');
+  var js = gulp.src('dist/**/*.js');
+  gulp
+    .src('src/index.html')
+    .pipe(inject(css, { relative: true }))
+    .pipe(inject(js, { relative: true }))
+    .pipe(gulp.dest('src'));
+  cb();
+}
+
+exports.default = series(cleanTask, uglifyJs, uglifyCss, injectFiles);
