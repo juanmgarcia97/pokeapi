@@ -4,23 +4,25 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "less": "lessc ./style.less"
+    "less": "lessc ./style.less",
+    "build": "webpack --config ./webpack.prod.js",
+    "build:dev": "webpack --config ./webpack.dev.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gulp-minify-css": "^1.2.4",
-    "less": "^4.1.2"
+    "less": "^4.1.2",
+    "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
-    "grunt": "^1.5.3",
-    "grunt-contrib-uglify": "^5.2.1",
-    "gulp": "^4.0.2",
-    "gulp-clean": "^0.4.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-inject": "^5.0.5",
-    "gulp-uglify": "^3.0.2"
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "less-loader": "^11.0.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   }
 }
