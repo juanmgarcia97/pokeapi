@@ -17,8 +17,9 @@ module.exports = merge(common, {
     ],
   },
   devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     port: 9000,
-    contentBase: path.join(__dirname, 'dist'),
-    headers: { 'Access-Control-Allow-Origin': '*' },
   },
 });

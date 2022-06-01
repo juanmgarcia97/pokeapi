@@ -6,7 +6,7 @@
   "scripts": {
     "less": "lessc ./style.less",
     "build": "webpack --config ./webpack.prod.js",
-    "build:dev": "webpack --config ./webpack.dev.js"
+    "build:dev": "webpack serve --config ./webpack.dev.js"
   },
   "keywords": [],
   "author": "",
