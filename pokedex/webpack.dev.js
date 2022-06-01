@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
@@ -12,10 +11,14 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.less$/i,
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+  devServer: {
+    port: 9000,
+    contentBase: path.join(__dirname, 'dist'),
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  },
 });

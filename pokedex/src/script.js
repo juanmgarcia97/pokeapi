@@ -1,3 +1,4 @@
+import './styles.less';
 const pokemonColorMap = {
   1: '#4ca04c', //green
   2: '#4ca04c',

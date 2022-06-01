@@ -18,8 +18,5 @@ module.exports = merge(common, {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
-  ],
+  plugins: [new MiniCssExtractPlugin({ filename: 'style.[contenthash].css' })],
 });

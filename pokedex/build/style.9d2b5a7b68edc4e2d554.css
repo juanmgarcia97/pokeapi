@@ -1,0 +1,34 @@
+.main-page {
+  display: grid;
+  grid-template-areas: 'header header header' '. main .' 'footer footer footer';
+  font-family: sans-serif;
+}
+.main-page .divider {
+  border-top: 1.5px solid black;
+}
+#pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  grid-area: main;
+}
+.header {
+  grid-area: header;
+  min-height: 100px;
+  margin: 0.5rem 0;
+}
+.header img {
+  height: 100px;
+  width: 300px;
+}
+.footer {
+  grid-area: footer;
+  min-height: 50px;
+}
+.footer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
