@@ -1,6 +1,6 @@
 const checkPP = () => {
     return (target: any, prop: string, descriptor: PropertyDescriptor) => {
-        if (this.ppAvailable > 0) console.log(`Your PP is ${this.ppAvailable}`);
+        if (target.ppAvailable > 0) console.log(`Your PP is ${target.ppAvailable}`);
         else console.log(`You can't check your PP, because is 0`);
 
     }
@@ -13,7 +13,7 @@ type Move = {
 
 class Pokemon {
     name: string;
-    ppAvailable = 1;
+    ppAvailable: number;
     constructor(name: string, ppAvailable: number) {
         this.name = name;
         this.ppAvailable = ppAvailable;
@@ -25,7 +25,7 @@ class Pokemon {
         this.ppAvailable -= 1;
     }
 
-    calculateDamage(move: any) {
+    calculateDamage(move: Move) {
         return move.power;
     }
 }
