@@ -1,14 +1,20 @@
-const checkPP = () => {
-    return (target: any, prop: string, descriptor: PropertyDescriptor) => {
-        if (target.ppAvailable > 0) console.log(`Your PP is ${target.ppAvailable}`);
-        else console.log(`You can't check your PP, because is 0`);
-
+const checkPP = () =>
+    (target: any, prop: string, descriptor: PropertyDescriptor) => {
+        const original = descriptor.value;
+        descriptor.value = function (...args) {
+            if (this.ppAvailable > 0) {
+                console.log(`${this.name}'s PP is ${this.ppAvailable}`);
+                original.apply(this);
+            }
+            else console.log(`You can't check your PP, because is 0`);
+        }
+        return descriptor;
     }
-}
 
-type Move = {
-    name: string,
-    power: number
+
+interface Move {
+    name: string;
+    power: number;
 };
 
 class Pokemon {
@@ -20,12 +26,12 @@ class Pokemon {
     }
 
     @checkPP()
-    figth(move: Move) {
+    figth(move: Move): void {
         console.log(`${this.name} used ${move?.name}!`);
         this.ppAvailable -= 1;
     }
 
-    calculateDamage(move: Move) {
+    calculateDamage(move: Move): number {
         return move.power;
     }
 }
