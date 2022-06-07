@@ -14,14 +14,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -101,26 +103,19 @@ var Pokemon = /** @class */ (function () {
     Pokemon.prototype.buildFieldsPokemon = function (pokemon) {
         this.name = pokemon.name;
         this.id = pokemon.id;
-        // you can only choose four moves from the list of moves
         this.moves = this.getPokemonMoves(pokemon.moves);
         this.types = this.getPokemonTypes(pokemon.types);
+        this.moves = this.fillMoveInformation(this.moves);
     };
     Pokemon.prototype.getPokemonMoves = function (moves) {
         var cleneadMoves = [];
         var movesSize = moves.length;
-        var randomNumber = Math.floor(Math.random() * movesSize);
         var counter = 0;
         while (counter < 4) {
-            cleneadMoves.push(moves[randomNumber]);
+            var randomNumber = Math.floor(Math.random() * movesSize);
+            cleneadMoves.push(moves[randomNumber].move);
+            counter++;
         }
-        // moves.forEach((move, index, array) => {
-        //   if (index < 4) {
-        //     cleneadMoves.push({
-        //       name: move.move.name,
-        //       url: move.move.url
-        //     })
-        //   }
-        // })
         return cleneadMoves;
     };
     Pokemon.prototype.getPokemonTypes = function (types) {
@@ -130,20 +125,38 @@ var Pokemon = /** @class */ (function () {
         });
         return cleanedTypes;
     };
+    Pokemon.prototype.fillMoveInformation = function (moves) {
+        var _this = this;
+        var filledMoves = [];
+        moves.forEach(function (move) { return __awaiter(_this, void 0, void 0, function () {
+            var result, resultData, newMove;
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, axios_1.default.get(move.url)];
+                    case 1:
+                        result = _c.sent();
+                        resultData = result.data;
+                        newMove = __assign({ type: resultData.type.name, damage: (_a = resultData.power) !== null && _a !== void 0 ? _a : 0, accuracy: (_b = resultData.accuracy) !== null && _b !== void 0 ? _b : 0, powerPoints: resultData.pp }, move);
+                        filledMoves.push(newMove);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        return filledMoves;
+    };
     Pokemon.prototype.displayInfo = function () {
         console.log("=========================");
-        console.log("".concat(this.id, " ").concat(this.name));
-        this.types.forEach(function (type) {
-            console.log("".concat(type.name));
+        console.log("Id: ".concat(this.id));
+        console.log("Name: ".concat(this.name));
+        this.types.forEach(function (type, index) {
+            console.log("Type ".concat(index + 1, ": ").concat(type.name));
         });
-        this.moves.forEach(function (move) {
-            console.log("".concat(move.name));
+        this.moves.forEach(function (move, index) {
+            // console.log(`Move ${index + 1}: ${move.name}`);
+            console.log(move);
         });
     };
-    Pokemon = __decorate([
-        getNewPokemons,
-        __metadata("design:paramtypes", [Object])
-    ], Pokemon);
     return Pokemon;
 }());
 exports.Pokemon = Pokemon;

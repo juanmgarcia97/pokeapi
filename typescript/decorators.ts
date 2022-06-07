@@ -1,3 +1,5 @@
+// tsc --target ES5 --experimentalDecorators
+
 const checkPP =
   () => (target: any, prop: string, descriptor: PropertyDescriptor) => {
     const original = descriptor.value;

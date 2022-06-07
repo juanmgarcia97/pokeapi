@@ -36,7 +36,6 @@ type Type = {
   url: string;
 };
 
-@getNewPokemons
 export class Pokemon {
   name: string = '';
   id: number = 0;
@@ -50,31 +49,24 @@ export class Pokemon {
   buildFieldsPokemon(pokemon: any) {
     this.name = pokemon.name;
     this.id = pokemon.id;
-    // you can only choose four moves from the list of moves
     this.moves = this.getPokemonMoves(pokemon.moves);
     this.types = this.getPokemonTypes(pokemon.types);
+    this.moves = this.fillMoveInformation(this.moves);
   }
 
   getPokemonMoves(moves: any[]): Move[] {
     const cleneadMoves: Move[] = []
     const movesSize = moves.length;
-    const randomNumber = Math.floor(Math.random() * movesSize);
     let counter = 0
     while (counter < 4) {
-      cleneadMoves.push(moves[randomNumber]);
+      const randomNumber = Math.floor(Math.random() * movesSize);
+      cleneadMoves.push(moves[randomNumber].move);
+      counter++;
     }
-    // moves.forEach((move, index, array) => {
-    //   if (index < 4) {
-    //     cleneadMoves.push({
-    //       name: move.move.name,
-    //       url: move.move.url
-    //     })
-    //   }
-    // })
     return cleneadMoves;
   }
 
-  getPokemonTypes(types): Type[] {
+  getPokemonTypes(types: any[]): Type[] {
     const cleanedTypes: Type[] = []
     types.forEach((type) => {
       cleanedTypes.push(type.type)
@@ -82,14 +74,33 @@ export class Pokemon {
     return cleanedTypes;
   }
 
+  fillMoveInformation(moves: Move[]): Move[] {
+    const filledMoves: Move[] = [];
+    moves.forEach(async move => {
+      const result = await axios.get(move.url);
+      const resultData = result.data;
+      const newMove = {
+        type: resultData.type.name,
+        damage: resultData.power ?? 0,
+        accuracy: resultData.accuracy ?? 0,
+        powerPoints: resultData.pp,
+        ...move
+      }
+      filledMoves.push(newMove)
+    })
+    return filledMoves;
+  }
+
   displayInfo() {
     console.log(`=========================`);
-    console.log(`${this.id} ${this.name}`);
-    this.types.forEach(type => {
-      console.log(`${type.name}`);
+    console.log(`Id: ${this.id}`);
+    console.log(`Name: ${this.name}`);
+    this.types.forEach((type, index) => {
+      console.log(`Type ${index + 1}: ${type.name}`);
     });
-    this.moves.forEach(move => {
-      console.log(`${move.name}`);
+    this.moves.forEach((move, index) => {
+      // console.log(`Move ${index + 1}: ${move.name}`);
+      console.log(move);
     });
   }
 }
