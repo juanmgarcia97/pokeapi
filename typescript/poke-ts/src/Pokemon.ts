@@ -18,7 +18,7 @@ export function getSinglePokemon(id: string | number) {
 
 function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
   return class extends constructor {
-    listOfIds = [1, 2, 3];
+    listOfIds = Array.from({ length: 3 }, () => Math.floor(Math.random() * 898) + 1);
   }
 }
 
@@ -51,7 +51,8 @@ export class Pokemon {
     this.id = pokemon.id;
     this.moves = this.getPokemonMoves(pokemon.moves);
     this.types = this.getPokemonTypes(pokemon.types);
-    this.moves = this.fillMoveInformation(this.moves);
+    // this.fillMoveInformation(this.moves);
+    Promise.all(this.moves.map(move => this.fillMoveInformation(move))).then(moves => this.moves = moves);
   }
 
   getPokemonMoves(moves: any[]): Move[] {
@@ -74,21 +75,16 @@ export class Pokemon {
     return cleanedTypes;
   }
 
-  fillMoveInformation(moves: Move[]): Move[] {
-    const filledMoves: Move[] = [];
-    moves.forEach(async move => {
-      const result = await axios.get(move.url);
-      const resultData = result.data;
-      const newMove = {
-        type: resultData.type.name,
-        damage: resultData.power ?? 0,
-        accuracy: resultData.accuracy ?? 0,
-        powerPoints: resultData.pp,
-        ...move
-      }
-      filledMoves.push(newMove)
-    })
-    return filledMoves;
+  async fillMoveInformation(move: Move) {
+    const result = await axios.get(move.url).then(res => res.data);
+    const filledMove: Move = {
+      ...move,
+      type: result.type.name ?? '',
+      damage: result.power ?? 0,
+      accuracy: result.accuracy ?? 0,
+      powerPoints: result.pp ?? 0,
+    }
+    return filledMove;
   }
 
   displayInfo() {
@@ -104,11 +100,11 @@ export class Pokemon {
     });
   }
 }
-
+@getNewPokemons
 export class PokemonTrainer {
   name: string;
   pokemons: Pokemon[] = [];
-  listOfIds: number[] = [2, 4];
+  listOfIds: number[] = [];
   constructor(name: string) {
     this.name = name;
   }

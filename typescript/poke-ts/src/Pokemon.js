@@ -25,6 +25,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -86,7 +95,7 @@ function getNewPokemons(constructor) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.listOfIds = [1, 2, 3];
+            _this.listOfIds = Array.from({ length: 3 }, function () { return Math.floor(Math.random() * 898) + 1; });
             return _this;
         }
         return class_1;
@@ -101,11 +110,13 @@ var Pokemon = /** @class */ (function () {
         this.buildFieldsPokemon(pokemonResult);
     }
     Pokemon.prototype.buildFieldsPokemon = function (pokemon) {
+        var _this = this;
         this.name = pokemon.name;
         this.id = pokemon.id;
         this.moves = this.getPokemonMoves(pokemon.moves);
         this.types = this.getPokemonTypes(pokemon.types);
-        this.moves = this.fillMoveInformation(this.moves);
+        // this.fillMoveInformation(this.moves);
+        Promise.all(this.moves.map(function (move) { return _this.fillMoveInformation(move); })).then(function (moves) { return _this.moves = moves; });
     };
     Pokemon.prototype.getPokemonMoves = function (moves) {
         var cleneadMoves = [];
@@ -125,25 +136,20 @@ var Pokemon = /** @class */ (function () {
         });
         return cleanedTypes;
     };
-    Pokemon.prototype.fillMoveInformation = function (moves) {
-        var _this = this;
-        var filledMoves = [];
-        moves.forEach(function (move) { return __awaiter(_this, void 0, void 0, function () {
-            var result, resultData, newMove;
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, axios_1.default.get(move.url)];
+    Pokemon.prototype.fillMoveInformation = function (move) {
+        var _a, _b, _c, _d;
+        return __awaiter(this, void 0, void 0, function () {
+            var result, filledMove;
+            return __generator(this, function (_e) {
+                switch (_e.label) {
+                    case 0: return [4 /*yield*/, axios_1.default.get(move.url).then(function (res) { return res.data; })];
                     case 1:
-                        result = _c.sent();
-                        resultData = result.data;
-                        newMove = __assign({ type: resultData.type.name, damage: (_a = resultData.power) !== null && _a !== void 0 ? _a : 0, accuracy: (_b = resultData.accuracy) !== null && _b !== void 0 ? _b : 0, powerPoints: resultData.pp }, move);
-                        filledMoves.push(newMove);
-                        return [2 /*return*/];
+                        result = _e.sent();
+                        filledMove = __assign(__assign({}, move), { type: (_a = result.type.name) !== null && _a !== void 0 ? _a : '', damage: (_b = result.power) !== null && _b !== void 0 ? _b : 0, accuracy: (_c = result.accuracy) !== null && _c !== void 0 ? _c : 0, powerPoints: (_d = result.pp) !== null && _d !== void 0 ? _d : 0 });
+                        return [2 /*return*/, filledMove];
                 }
             });
-        }); });
-        return filledMoves;
+        });
     };
     Pokemon.prototype.displayInfo = function () {
         console.log("=========================");
@@ -163,7 +169,7 @@ exports.Pokemon = Pokemon;
 var PokemonTrainer = /** @class */ (function () {
     function PokemonTrainer(name) {
         this.pokemons = [];
-        this.listOfIds = [2, 4];
+        this.listOfIds = [];
         this.name = name;
     }
     PokemonTrainer.prototype.getPokemons = function () {
@@ -201,6 +207,10 @@ var PokemonTrainer = /** @class */ (function () {
             });
         });
     };
+    PokemonTrainer = __decorate([
+        getNewPokemons,
+        __metadata("design:paramtypes", [String])
+    ], PokemonTrainer);
     return PokemonTrainer;
 }());
 exports.PokemonTrainer = PokemonTrainer;
