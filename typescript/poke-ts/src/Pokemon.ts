@@ -18,7 +18,7 @@ export function getSinglePokemon(id: string | number) {
 
 function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
   return class extends constructor {
-    listOfIds = [1, 2, 3];
+    listOfIds = Array.from({ length: 3 }, () => Math.floor(Math.random() * 898) + 1);
   }
 }
 
@@ -36,7 +36,6 @@ type Type = {
   url: string;
 };
 
-@getNewPokemons
 export class Pokemon {
   name: string = '';
   id: number = 0;
@@ -50,31 +49,25 @@ export class Pokemon {
   buildFieldsPokemon(pokemon: any) {
     this.name = pokemon.name;
     this.id = pokemon.id;
-    // you can only choose four moves from the list of moves
     this.moves = this.getPokemonMoves(pokemon.moves);
     this.types = this.getPokemonTypes(pokemon.types);
+    // this.fillMoveInformation(this.moves);
+    Promise.all(this.moves.map(move => this.fillMoveInformation(move))).then(moves => this.moves = moves);
   }
 
   getPokemonMoves(moves: any[]): Move[] {
     const cleneadMoves: Move[] = []
     const movesSize = moves.length;
-    const randomNumber = Math.floor(Math.random() * movesSize);
     let counter = 0
     while (counter < 4) {
-      cleneadMoves.push(moves[randomNumber]);
+      const randomNumber = Math.floor(Math.random() * movesSize);
+      cleneadMoves.push(moves[randomNumber].move);
+      counter++;
     }
-    // moves.forEach((move, index, array) => {
-    //   if (index < 4) {
-    //     cleneadMoves.push({
-    //       name: move.move.name,
-    //       url: move.move.url
-    //     })
-    //   }
-    // })
     return cleneadMoves;
   }
 
-  getPokemonTypes(types): Type[] {
+  getPokemonTypes(types: any[]): Type[] {
     const cleanedTypes: Type[] = []
     types.forEach((type) => {
       cleanedTypes.push(type.type)
@@ -82,22 +75,36 @@ export class Pokemon {
     return cleanedTypes;
   }
 
+  async fillMoveInformation(move: Move) {
+    const result = await axios.get(move.url).then(res => res.data);
+    const filledMove: Move = {
+      ...move,
+      type: result.type.name ?? '',
+      damage: result.power ?? 0,
+      accuracy: result.accuracy ?? 0,
+      powerPoints: result.pp ?? 0,
+    }
+    return filledMove;
+  }
+
   displayInfo() {
     console.log(`=========================`);
-    console.log(`${this.id} ${this.name}`);
-    this.types.forEach(type => {
-      console.log(`${type.name}`);
+    console.log(`Id: ${this.id}`);
+    console.log(`Name: ${this.name}`);
+    this.types.forEach((type, index) => {
+      console.log(`Type ${index + 1}: ${type.name}`);
     });
-    this.moves.forEach(move => {
-      console.log(`${move.name}`);
+    this.moves.forEach((move, index) => {
+      // console.log(`Move ${index + 1}: ${move.name}`);
+      console.log(move);
     });
   }
 }
-
+@getNewPokemons
 export class PokemonTrainer {
   name: string;
   pokemons: Pokemon[] = [];
-  listOfIds: number[] = [2, 4];
+  listOfIds: number[] = [];
   constructor(name: string) {
     this.name = name;
   }
