@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 /*
 
 Pokemon class
@@ -7,19 +7,24 @@ Pokemon class
 
 List of goals:
   - create a function to get all information of a pokemon from result of getSinglePokemon
-  - get a List of types from a pokemon, assing to a variable called types
+  - get a List of types from a pokemon, assign to a variable called types
   - get a List of moves from a pokemon, you can only choose 4 moves by pokemon, those moves should be aleatory
   - fill Moves with missing data from Types you can get the information from url of the move.
-  - re-write decortator to get new pokemons Ids in PokemonTrainer class 
+  - re-write decorator to get new pokemons Ids in PokemonTrainer class.
 */
 export function getSinglePokemon(id: string | number) {
   return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
 
-function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
+function getNewPokemons<T extends { new (...args: any[]): {} }>(
+  constructor: T
+) {
   return class extends constructor {
-    listOfIds = Array.from({ length: 3 }, () => Math.floor(Math.random() * 898) + 1);
-  }
+    listOfIds = Array.from(
+      { length: Math.floor(Math.random() * 6) + 1 },
+      () => Math.floor(Math.random() * 898) + 1
+    );
+  };
 }
 
 type Move = {
@@ -52,38 +57,43 @@ export class Pokemon {
     this.moves = this.getPokemonMoves(pokemon.moves);
     this.types = this.getPokemonTypes(pokemon.types);
     // this.fillMoveInformation(this.moves);
-    Promise.all(this.moves.map(move => this.fillMoveInformation(move))).then(moves => this.moves = moves);
+    Promise.all(
+      this.moves.map((move) => Pokemon.fillMoveInformation(move))
+    ).then((moves) => (this.moves = moves));
+    // this.moves = this.moves.(async (move) => {
+    //   await this.fillMoveInformation(move);
+    // })
   }
 
   getPokemonMoves(moves: any[]): Move[] {
-    const cleneadMoves: Move[] = []
+    const cleanedMoves: Move[] = [];
     const movesSize = moves.length;
-    let counter = 0
+    let counter = 0;
     while (counter < 4) {
       const randomNumber = Math.floor(Math.random() * movesSize);
-      cleneadMoves.push(moves[randomNumber].move);
+      cleanedMoves.push(moves[randomNumber].move);
       counter++;
     }
-    return cleneadMoves;
+    return cleanedMoves;
   }
 
   getPokemonTypes(types: any[]): Type[] {
-    const cleanedTypes: Type[] = []
+    const cleanedTypes: Type[] = [];
     types.forEach((type) => {
-      cleanedTypes.push(type.type)
+      cleanedTypes.push(type.type);
     });
     return cleanedTypes;
   }
 
-  async fillMoveInformation(move: Move) {
-    const result = await axios.get(move.url).then(res => res.data);
+  static async fillMoveInformation(move: Move) {
+    const result = await axios.get(move.url).then((res) => res.data);
     const filledMove: Move = {
       ...move,
       type: result.type.name ?? '',
       damage: result.power ?? 0,
       accuracy: result.accuracy ?? 0,
       powerPoints: result.pp ?? 0,
-    }
+    };
     return filledMove;
   }
 
@@ -110,9 +120,9 @@ export class PokemonTrainer {
   }
 
   async getPokemons() {
-    const listPokemons = this.listOfIds.map(id => getSinglePokemon(id));
-    const results = await Promise.all(listPokemons)
-    results.forEach(result => {
+    const listPokemons = this.listOfIds.map((id) => getSinglePokemon(id));
+    const results = await Promise.all(listPokemons);
+    results.forEach((result) => {
       this.pokemons.push(new Pokemon(result.data));
     });
   }
@@ -120,7 +130,7 @@ export class PokemonTrainer {
   async showTeam() {
     await this.getPokemons();
     console.log('Trainer:', this.name);
-    this.pokemons.forEach(pokemon => {
+    this.pokemons.forEach((pokemon) => {
       pokemon.displayInfo();
     });
   }
