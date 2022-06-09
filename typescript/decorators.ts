@@ -10,10 +10,10 @@ const checkPP =
     return descriptor;
   };
 
-interface Move {
+type Move = {
   name: string;
   power: number;
-}
+};
 
 class Pokemon {
   name: string;
