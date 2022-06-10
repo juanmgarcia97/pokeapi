@@ -71,7 +71,8 @@ export class Pokemon {
     const cleanedMoves: Move[] = [];
     const movesSize = moves.length;
     let counter = 0;
-    const MAX_MOVES = 4;
+    let MAX_MOVES = 4;
+    if (movesSize < MAX_MOVES) MAX_MOVES = movesSize;
     while (counter < MAX_MOVES) {
       const randomNumber = getRandomNumber(0, movesSize);
       cleanedMoves.push(moves[randomNumber].move);
