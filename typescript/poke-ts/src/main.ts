@@ -1,7 +1,4 @@
-import { PokemonTrainer } from "./Pokemon";
+import { PokemonTrainer } from './Pokemon';
 
-const pokemonMaster = new PokemonTrainer("Misty");
+const pokemonMaster = new PokemonTrainer('Misty');
 pokemonMaster.showTeam();
-async () => {
-    await pokemonMaster.getPokemons()
-}
