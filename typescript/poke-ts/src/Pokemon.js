@@ -116,7 +116,6 @@ var Pokemon = /** @class */ (function () {
     Pokemon.prototype.buildFieldsPokemon = function (pokemon) {
         return __awaiter(this, void 0, void 0, function () {
             var apiMoves, _a;
-            var _this = this;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -125,7 +124,7 @@ var Pokemon = /** @class */ (function () {
                         apiMoves = this.getPokemonMoves(pokemon.moves);
                         this.types = this.getPokemonTypes(pokemon.types);
                         _a = this;
-                        return [4 /*yield*/, Promise.all(apiMoves.map(function (move) { return _this.fillMoveInformation(move); }))];
+                        return [4 /*yield*/, Promise.all(apiMoves.map(this.fillMoveInformation))];
                     case 1:
                         _a.moves = _b.sent();
                         this.displayInfo();
@@ -139,6 +138,8 @@ var Pokemon = /** @class */ (function () {
         var movesSize = moves.length;
         var counter = 0;
         var MAX_MOVES = 4;
+        if (movesSize < MAX_MOVES)
+            MAX_MOVES = movesSize;
         while (counter < MAX_MOVES) {
             var randomNumber = getRandomNumber(0, movesSize);
             cleanedMoves.push(moves[randomNumber].move);

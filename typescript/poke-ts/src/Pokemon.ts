@@ -23,7 +23,7 @@ function getRandomNumber(min: number, max: number): number {
 const MAX_POKEMON_ID = 898;
 const MAX_POKEMON_PER_TRAINER = 6;
 
-function getNewPokemons<T extends { new (...args: any[]): {} }>(
+function getNewPokemons<T extends { new(...args: any[]): {} }>(
   constructor: T
 ) {
   return class extends constructor {
@@ -54,7 +54,7 @@ export class Pokemon {
   moves: Move[] = [];
   types: Type[] = [];
 
-  constructor() {}
+  constructor() { }
 
   async buildFieldsPokemon(pokemon: any) {
     this.name = pokemon.name;
@@ -62,7 +62,7 @@ export class Pokemon {
     const apiMoves = this.getPokemonMoves(pokemon.moves);
     this.types = this.getPokemonTypes(pokemon.types);
     this.moves = await Promise.all(
-      apiMoves.map((move) => this.fillMoveInformation(move))
+      apiMoves.map(this.fillMoveInformation)
     );
     this.displayInfo();
   }
@@ -110,8 +110,7 @@ export class Pokemon {
     });
     this.moves.forEach((move, index) => {
       console.log(
-        `Move ${index + 1}: ${move.name}, type: ${move.type}, damage: ${
-          move.damage
+        `Move ${index + 1}: ${move.name}, type: ${move.type}, damage: ${move.damage
         }, accuracy: ${move.accuracy}, pp: ${move.powerPoints}`
       );
     });
