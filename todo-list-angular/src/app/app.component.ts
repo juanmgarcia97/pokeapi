@@ -13,7 +13,6 @@ interface Item {
 export class AppComponent {
   title = 'todo-list-angular';
   tasks: Item[] = [];
-  @Input()
   item: Item = { name: '', done: false };
 
   addItem(task: string) {

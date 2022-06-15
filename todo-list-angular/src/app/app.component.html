@@ -1,8 +1,12 @@
 <div class="todoapp">
   <h1>Todos</h1>
-  <input #newItem type="text" placeholder="What needs to be done?" />
+  <input
+    [(ngModel)]="item.name"
+    type="text"
+    placeholder="What needs to be done?"
+  />
 
-  <button (click)="addItem(newItem.value)">Add</button>
+  <button (click)="addItem(item.name)">Add</button>
   <ul class="todo-list">
     <li *ngFor="let task of tasks">{{ task.name }}</li>
   </ul>
