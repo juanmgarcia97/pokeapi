@@ -1,0 +1,25 @@
+<section class="todoapp">
+  <header class="header">
+    <h1>Tareas</h1>
+    <input
+      id="new-todo"
+      [(ngModel)]="nuevaTarea"
+      type="text"
+      class="new-todo"
+      autofocus
+      placeholder="Nueva tarea"
+      (keyup.enter)="crearTarea()"
+    />
+  </header>
+  <section class="main" id="main">
+    <ul class="todo-list" id="todo-list">
+      <li *ngFor="let tarea of listaTareas; let i = index">
+        <button class="toggle" (click)="cambiarEstado(i)"></button>
+        <label>
+          {{ tarea.nombre }}
+        </label>
+        <button (click)="eliminarTarea(i)">&times;</button>
+      </li>
+    </ul>
+  </section>
+</section>

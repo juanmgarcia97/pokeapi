@@ -13,12 +13,17 @@ interface Item {
 export class AppComponent {
   title = 'todo-list-angular';
   tasks: Item[] = [];
-  item: Item = { name: '', done: false };
+  item: string = '';
 
   addItem(task: string) {
     this.tasks.unshift({
       name: task,
       done: false
     });
+  }
+
+  changeState(index: number) {
+    const task = this.tasks[index];
+    task.done = !task.done;
   }
 }
