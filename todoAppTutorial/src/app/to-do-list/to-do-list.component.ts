@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 type Task = {
-    nombre: string;
-    completada: boolean
+    name: string;
+    done: boolean
 }
 
 @Component({
@@ -10,27 +10,24 @@ type Task = {
     templateUrl: './to-do-list.component.html',
     styleUrls: ['./to-do-list.component.scss']
 })
-export class ToDoListComponent implements OnInit {
-    nuevaTarea: string = '';
-    listaTareas: Task[] = [];
-    constructor() { }
-    ngOnInit(): void {
-    }
+export class ToDoListComponent {
+    newTask: string = '';
+    tasksList: Task[] = [];
 
-    crearTarea() {
-        this.listaTareas.unshift({
-            nombre: this.nuevaTarea,
-            completada: false
+    createTask() {
+        this.tasksList.unshift({
+            name: this.newTask,
+            done: false
         });
-        this.nuevaTarea = '';
+        this.newTask = '';
     }
 
-    cambiarEstado(index: number) {
-        const tarea = this.listaTareas[index];
-        tarea.completada = !tarea.completada;
+    changeState(index: number) {
+        const tarea = this.tasksList[index];
+        tarea.done = !tarea.done;
     }
 
-    eliminarTarea(index: number) {
-        this.listaTareas.splice(index, 1);
+    deleteTask(index: number) {
+        this.tasksList.splice(index, 1);
     }
 }
