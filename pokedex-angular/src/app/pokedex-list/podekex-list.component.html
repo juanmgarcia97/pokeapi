@@ -2,5 +2,11 @@
   <header class="header">
     <h1>Pokedex</h1>
   </header>
-  <section class="main"></section>
+  <section class="main">
+    <div class="pokedex-list">
+      <div class="pokemon" *ngFor="let pokemon of pokedex">
+        <label> {{ pokemon.name }} </label>
+      </div>
+    </div>
+  </section>
 </section>
