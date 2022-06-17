@@ -20,7 +20,7 @@
           class="toggle"
           (click)="changeState(i)"
         />
-        <label [class.completed]="task.done">
+        <label [ngClass]="{ completed: task.done }">
           {{ task.name }}
         </label>
         <button class="destroy" (click)="deleteTask(i)"></button>
