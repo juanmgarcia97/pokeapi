@@ -5,6 +5,7 @@
   <section class="main">
     <div class="pokedex-list">
       <div class="pokemon" *ngFor="let pokemon of pokedex">
+        <img [src]="pokemon.url" />
         <label> {{ pokemon.name }} </label>
       </div>
     </div>
