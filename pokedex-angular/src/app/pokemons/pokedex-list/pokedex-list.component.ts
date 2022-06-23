@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Pokemon, pokedex, pokemonColorMap } from 'src/assets/utils';
+import { pokedex, pokemonColorMap } from '../utils/mock-data';
+import { Pokemon } from '../utils/types';
 
 @Component({
   selector: 'app-pokedex-list',

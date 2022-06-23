@@ -3,18 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokedexListComponent } from './pokedex-list/pokedex-list.component';
+import { PokedexListComponent } from './pokemons/pokedex-list/pokedex-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PokedexListComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-  ],
+  declarations: [AppComponent, PokedexListComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
