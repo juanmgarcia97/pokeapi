@@ -4,9 +4,11 @@
   </header>
   <section class="main">
     <div class="pokedex-list">
-      <div class="pokemon" *ngFor="let pokemon of pokedex">
+      <div class="pokemon" *ngFor="let pokemon of myPokedex" [ngStyle]="{'background-color': pokemon.color}">
         <img [src]="pokemon.url" />
-        <label> {{ pokemon.name }} </label>
+        <p style="text-transform: capitalize; text-align: center;"
+          [ngStyle]="{'color': pokemon.color.split('#')[1].startsWith('f') ? 'black' : 'white'}"> {{ pokemon.name }}
+        </p>
       </div>
     </div>
   </section>
