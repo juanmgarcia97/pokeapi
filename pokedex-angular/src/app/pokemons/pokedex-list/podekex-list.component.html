@@ -1,15 +1,5 @@
-<section class="pokedex-app">
-  <header class="header">
-    <h1>Pokedex</h1>
-  </header>
-  <section class="main">
-    <div class="pokedex-list">
-      <div class="pokemon" *ngFor="let pokemon of myPokedex" [ngStyle]="{'background-color': pokemon.color}">
-        <img [src]="pokemon.url" />
-        <p style="text-transform: capitalize; text-align: center;"
-          [ngStyle]="{'color': pokemon.color.split('#')[1].startsWith('f') ? 'black' : 'white'}"> {{ pokemon.name }}
-        </p>
-      </div>
-    </div>
-  </section>
-</section>
+<div class="main">
+  <div class="pokedex-list">
+    <app-poke-card *ngFor="let pokemon of myPokedex" [pokemon]="pokemon"></app-poke-card>
+  </div>
+</div>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { pokedex, pokemonColorMap } from '../utils/mock-data';
-import { Pokemon } from '../utils/types';
+import {
+  pokedex,
+  pokemonColorMap,
+  getPokemonImageUri,
+} from 'src/app/utils/mock-data';
+import { Pokemon } from 'src/app/utils/types';
 
 @Component({
   selector: 'app-pokedex-list',
@@ -13,13 +17,8 @@ export class PokedexListComponent implements OnInit {
   ngOnInit(): void {
     this.myPokedex.map((pokemon, index) => {
       const realIndex: number = index + 1;
-      pokemon.url = this.getPokemonImageUri(realIndex);
+      pokemon.url = getPokemonImageUri(realIndex);
       pokemon.color = pokemonColorMap[realIndex];
     });
-  }
-
-  getPokemonImageUri(id: number) {
-    const imageId = ('00' + id).slice(-3); // para 1 => 001
-    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
   }
 }

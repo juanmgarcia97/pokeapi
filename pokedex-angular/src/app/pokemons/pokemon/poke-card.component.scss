@@ -1,13 +1,3 @@
-
-
-.pokedex-list {
-  grid-area: main;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 0.5rem;
-}
-
 .pokemon {
   border-radius: 5px;
   width: fit-content;
@@ -19,7 +9,7 @@
   width: 150px;
 }
 
-.pokemon label {
+.pokemon p {
   text-transform: capitalize;
   text-align: center;
   padding: 5px;

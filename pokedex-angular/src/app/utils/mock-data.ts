@@ -91,7 +91,7 @@ export const pokedex: Pokemon[] = [
   },
 ];
 
-export const pokemonColorMap: any = {
+export const pokemonColorMap: { [key: number]: string } = {
   1: '#4ca04c', //green
   2: '#4ca04c',
   3: '#4ca04c',
@@ -244,3 +244,8 @@ export const pokemonColorMap: any = {
   150: '#523352',
   151: '#ffb6c3',
 };
+
+export function getPokemonImageUri(id: number) {
+  const imageId = ('00' + id).slice(-3); // para 1 => 001
+  return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
+}
