@@ -9,6 +9,7 @@ import { Pokemon } from 'src/app/utils/types';
 export class PokeCardComponent {
   @Input()
   pokemon: Pokemon = {
+    id: 0,
     name: '',
     color: '',
     url: '',

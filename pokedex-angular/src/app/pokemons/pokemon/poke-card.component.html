@@ -1,5 +1,7 @@
-<div class="pokemon" [ngStyle]="{'background-color': pokemon.color}">
+<div class="pokemon"
+  [ngStyle]="{'background-color': pokemon.color, 'color': pokemon.color.split('#')[1].startsWith('f') ? 'black' : 'white'}">
   <img [src]="pokemon.url" />
-  <p [ngStyle]="{'color': pokemon.color.split('#')[1].startsWith('f') ? 'black' : 'white'}"> {{ pokemon.name }}
+  <p>{{ '#' + ('00' + pokemon.id).slice(-3) }}</p>
+  <p> {{ pokemon.name }}
   </p>
 </div>

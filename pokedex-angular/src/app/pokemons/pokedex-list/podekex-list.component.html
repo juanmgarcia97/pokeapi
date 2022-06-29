@@ -1,4 +1,5 @@
 <div class="main">
+  <app-pokemon-filter (filter)="filterPokedex($event)"></app-pokemon-filter>
   <div class="pokedex-list">
     <app-poke-card *ngFor="let pokemon of myPokedex" [pokemon]="pokemon"></app-poke-card>
   </div>
