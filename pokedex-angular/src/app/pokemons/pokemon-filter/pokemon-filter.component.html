@@ -1,4 +1,4 @@
 <div>
-  <input type="text" class="filter" placeholder="Search" (ngModelChange)="filter.emit(searchText)"
-    [(ngModel)]="searchText">
+  <input type="text" class="filter" placeholder="Search" [(ngModel)]="searchText"
+    (ngModelChange)="filter.emit(searchText)">
 </div>

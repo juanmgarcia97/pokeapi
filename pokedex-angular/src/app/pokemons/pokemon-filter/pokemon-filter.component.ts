@@ -9,5 +9,5 @@ import { Pokemon } from 'src/app/utils/types';
 export class PokemonFilterComponent {
   searchText: string = '';
   @Output()
-  filter = new EventEmitter();
+  filter = new EventEmitter<string>();
 }

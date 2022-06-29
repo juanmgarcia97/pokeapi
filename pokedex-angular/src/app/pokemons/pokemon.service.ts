@@ -13,18 +13,9 @@ export class PokemonService {
   constructor(private http: HttpClient) {}
 
   getPokemonList(offset: number, limit: number) {
-    const response = this.http.get(
+    return this.http.get(
       `${this.api}/pokemon?limit=${limit}&offset=${offset}`
     ) as Observable<{ results: Pokemon[] }>;
-    response.forEach((data) => {
-      data.results.map((pokemon, index) => {
-        const realIndex: number = index + 1;
-        pokemon.id = realIndex;
-        pokemon.url = this.getPokemonImageUri(realIndex);
-        pokemon.color = pokemonColorMap[realIndex];
-      });
-    });
-    return response;
   }
 
   getPokemonImageUri(id: number) {

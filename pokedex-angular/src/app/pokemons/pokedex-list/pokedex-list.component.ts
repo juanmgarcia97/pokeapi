@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { pokedex, pokemonColorMap } from 'src/app/utils/mock-data';
+import { pokemonColorMap } from 'src/app/utils/mock-data';
 import { Pokemon } from 'src/app/utils/types';
 import { PokemonService } from '../pokemon.service';
 
@@ -9,7 +9,8 @@ import { PokemonService } from '../pokemon.service';
   styleUrls: ['./pokedex-list.component.scss'],
 })
 export class PokedexListComponent implements OnInit {
-  myPokedex: Pokemon[] = pokedex;
+  myPokedex: Pokemon[] = [];
+  displayPokedex: Pokemon[] = [];
   limit: number = 50;
   offset: number = 0;
   @Input()
@@ -18,25 +19,28 @@ export class PokedexListComponent implements OnInit {
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
-    this.myPokedex.map((pokemon, index) => {
+    this.pokemonService
+      .getPokemonList(this.offset, this.limit)
+      .subscribe((data: { results: Pokemon[] }) => {
+        this.myPokedex = [...this.myPokedex, ...data.results];
+        this.displayPokedex = this.updatePokedex(data);
+      });
+    this.offset += this.limit;
+  }
+
+  updatePokedex(data: { results: Pokemon[] }) {
+    return data.results.map((pokemon, index) => {
       const realIndex: number = index + 1;
       pokemon.id = realIndex;
       pokemon.url = this.pokemonService.getPokemonImageUri(realIndex);
       pokemon.color = pokemonColorMap[realIndex];
+      return pokemon;
     });
-    // this.pokemonService
-    //   .getPokemonList(this.offset, this.limit)
-    //   .subscribe((data: { results: Pokemon[] }) => {
-    //     this.myPokedex = [...this.myPokedex, ...data.results];
-    //   });
-    // this.offset += this.limit;
   }
 
   filterPokedex(event: any) {
-    console.log(event);
-
-    // this.myPokedex.filter((pokemon) => {
-    //   return pokemon.name.includes(text);
-    // });
+    this.displayPokedex = this.myPokedex.filter((pokemon) => {
+      return pokemon.name.includes(event);
+    });
   }
 }
