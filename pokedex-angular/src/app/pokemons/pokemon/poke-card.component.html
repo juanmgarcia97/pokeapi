@@ -1,4 +1,4 @@
-<div class="pokemon"
+<div class="pokemon" (click)="goToPokemonProfile()"
   [ngStyle]="{'background-color': pokemon.color, 'color': pokemon.color.split('#')[1].startsWith('f') ? 'black' : 'white'}">
   <img [src]="pokemon.url" />
   <p>{{ '#' + ('00' + pokemon.id).slice(-3) }}</p>

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pokemon } from 'src/app/utils/types';
 
 @Component({
@@ -7,6 +8,7 @@ import { Pokemon } from 'src/app/utils/types';
   styleUrls: ['./poke-card.component.scss'],
 })
 export class PokeCardComponent {
+  constructor(private router: Router) {}
   @Input()
   pokemon: Pokemon = {
     id: 0,
@@ -14,4 +16,7 @@ export class PokeCardComponent {
     color: '',
     url: '',
   };
+  goToPokemonProfile() {
+    this.router.navigate([`/pokedex/${this.pokemon.id}`]);
+  }
 }
