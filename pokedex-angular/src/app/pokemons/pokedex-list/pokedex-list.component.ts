@@ -32,7 +32,7 @@ export class PokedexListComponent implements OnInit {
     return data.results.map((pokemon, index) => {
       const realIndex: number = index + 1;
       pokemon.id = realIndex;
-      pokemon.url = this.pokemonService.getPokemonImageUri(realIndex);
+      pokemon.image = this.pokemonService.getPokemonImageUri(realIndex);
       pokemon.color = pokemonColorMap[realIndex];
       return pokemon;
     });
