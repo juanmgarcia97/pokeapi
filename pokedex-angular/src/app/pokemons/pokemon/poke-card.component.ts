@@ -15,8 +15,9 @@ export class PokeCardComponent {
     name: '',
     color: '',
     url: '',
+    image: '',
   };
   goToPokemonProfile() {
-    this.router.navigate([`/pokedex/${this.pokemon.id}`]);
+    this.router.navigate([`/pokedex/${this.pokemon.id}`, this.pokemon]);
   }
 }
