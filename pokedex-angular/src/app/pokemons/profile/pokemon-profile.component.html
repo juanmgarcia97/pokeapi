@@ -1,2 +1,6 @@
 <div>Pokemon Profile</div>
+<div [ngStyle]="{'background-color': pokemon.color}">
+  <p>{{pokemon.name}}</p>
+  <img [src]="pokemon.image">
+</div>
 <button (click)="goBack()">Go back</button>
