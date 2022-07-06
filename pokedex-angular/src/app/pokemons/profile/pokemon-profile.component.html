@@ -1,6 +1,21 @@
-<div>Pokemon Profile</div>
-<div [ngStyle]="{'background-color': pokemon.color}">
-  <p>{{pokemon.name}}</p>
-  <img [src]="pokemon.image">
+<div class="poke-profile">
+  <h1>{{pokemonProfile.name + ' N.°' + getNumber(pokemonProfile.id)}}</h1>
+  <div class="container" [ngStyle]="{'background-color': pokemon.color}">
+    <div class="image">
+      <img [src]="pokemon.image">
+    </div>
+    <div class="basic-info">
+      <div class="info">
+        <h3>Height:</h3>
+        <p>{{ pokemonProfile.height }}</p>
+      </div>
+      <div class="info">
+        <h3>Type:</h3>
+        <div *ngFor="let type of pokemonProfile.types">
+          <p>{{ type.type.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="goBack()">Return to Pokédex</button>
 </div>
-<button (click)="goBack()">Go back</button>
