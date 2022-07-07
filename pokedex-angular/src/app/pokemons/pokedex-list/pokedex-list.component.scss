@@ -1,6 +1,4 @@
-
-
-ng-template .pokedex-list {
+.pokedex-list {
   grid-area: main;
   display: flex;
   flex-wrap: wrap;
@@ -23,4 +21,9 @@ ng-template .pokedex-list {
   text-transform: capitalize;
   text-align: center;
   padding: 5px;
+}
+
+.no-items {
+  justify-self: center;
+  align-self: center;
 }
