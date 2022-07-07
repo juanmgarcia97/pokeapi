@@ -23,11 +23,15 @@ export class PokemonService {
   }
 
   getPokemonImageUri(id: number) {
-    const imageId = ('00' + id).slice(-3); // para 1 => 001
+    const imageId = ('000' + id).slice(-3); // para 1 => 001
     return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
   }
 
   getPokemonNumber(id: number) {
-    return ('00' + id).slice(-3);
+    return ('000' + id).slice(-3);
+  }
+
+  getPokemonIdByUrl(url: string) {
+    return Number(url.split('/')[6]);
   }
 }
