@@ -46,5 +46,12 @@ export class PokedexListComponent implements OnInit {
     this.displayPokedex = this.myPokedex.filter((pokemon) => {
       return pokemon.name.includes(event);
     });
+    this.sortPokemons();
+  }
+
+  sortPokemons() {
+    this.displayPokedex.sort((actual, next) =>
+      actual.name.localeCompare(next.name)
+    );
   }
 }
