@@ -27,3 +27,20 @@
   justify-self: center;
   align-self: center;
 }
+
+.actions {
+  display: flex;
+  justify-content: start;
+  align-content: center;
+  margin: 2rem 1rem;
+  app-pokemon-filter {
+    border-radius: 5px;
+    font-size: x-large;
+
+  }
+  .paginator {
+    padding: 0 2rem;
+    margin: 0 1rem;
+    border-radius: 5px;
+  }
+}
