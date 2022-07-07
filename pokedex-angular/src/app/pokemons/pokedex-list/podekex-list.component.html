@@ -1,15 +1,13 @@
 <div class="main">
-  <app-pokemon-filter (filter)="filterPokedex($event)"></app-pokemon-filter>
-  <ng-template
-    class="pokedex-list"
-    [ngIf]="displayPokedex.length > 0"
-    [ngIfElse]="no_items"
-  >
-    <app-poke-card
-      *ngFor="let pokemon of displayPokedex"
-      [pokemon]="pokemon"
-    ></app-poke-card>
-  </ng-template>
+  <div class="actions">
+    <app-pokemon-filter (filter)="filterPokedex($event)"></app-pokemon-filter>
+    <button class="paginator" (click)="retrievePokemons()">Next &plus;</button>
+  </div>
+  <div class="pokedex-list">
+    <ng-template [ngIf]="displayPokedex.length > 0" [ngIfElse]="no_items">
+      <app-poke-card *ngFor="let pokemon of displayPokedex" [pokemon]="pokemon"></app-poke-card>
+    </ng-template>
+  </div>
   <ng-template #no_items>
     <div class="no-items">
       <h1>No pokemons found</h1>
