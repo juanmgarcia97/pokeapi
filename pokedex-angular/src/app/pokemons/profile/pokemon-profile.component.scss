@@ -1,0 +1,25 @@
+.poke-profile {
+  h1 {
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .basic-info {
+    h3, p {
+      margin: 0 !important;
+      align-self: center;
+    }
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 5px;
+    .info {
+      gap: 5px;
+      display: flex;
+    }
+  }
+}

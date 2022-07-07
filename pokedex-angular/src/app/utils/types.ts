@@ -7,22 +7,22 @@ export type Pokemon = {
 };
 
 export type PokemonApi = {
-  abilities: unknown[];
+  abilities: any[];
   base_experience: number;
-  forms: unknown[];
-  game_indices: unknown[];
+  forms: any[];
+  game_indices: any[];
   height: number;
   id: number;
-  held_items: unknown[];
+  held_items: any[];
   is_default: boolean;
   location_area_encounters: string;
-  moves: unknown[];
+  moves: any[];
   name: string;
   order: number;
-  past_types: unknown[];
-  species: unknown;
-  sprites: unknown;
-  stats: unknown[];
-  types: unknown[];
+  past_types: any[];
+  species: any;
+  sprites: any;
+  stats: any[];
+  types: any[];
   weight: number;
 };
