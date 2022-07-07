@@ -19,6 +19,10 @@ export class PokedexListComponent implements OnInit {
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
+    this.retrievePokemons();
+  }
+
+  retrievePokemons() {
     this.pokemonService
       .getPokemonList(this.offset, this.limit)
       .subscribe((data: { results: Pokemon[] }) => {
@@ -31,8 +35,8 @@ export class PokedexListComponent implements OnInit {
   updatePokedex(data: { results: Pokemon[] }) {
     return data.results.map((pokemon, index) => {
       const realIndex: number = index + 1;
-      pokemon.id = realIndex;
-      pokemon.image = this.pokemonService.getPokemonImageUri(realIndex);
+      pokemon.id = this.pokemonService.getPokemonIdByUrl(pokemon.url);
+      pokemon.image = this.pokemonService.getPokemonImageUri(pokemon.id);
       pokemon.color = pokemonColorMap[realIndex];
       return pokemon;
     });
