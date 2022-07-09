@@ -7,8 +7,8 @@ import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
-  imports: [AppRoutingModule, BrowserModule, HttpClientModule],
+  declarations: [AppComponent],
+  imports: [AppRoutingModule, BrowserModule, HttpClientModule, CoreModule],
   providers: [],
   bootstrap: [AppComponent],
 })
