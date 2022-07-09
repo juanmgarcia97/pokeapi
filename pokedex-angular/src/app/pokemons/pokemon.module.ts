@@ -1,8 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { PokedexListComponent } from './pokedex-list/pokedex-list.component';
+import { PokemonChartComponent } from './pokemon-chart/pokemon-chart.component';
 import { PokemonFilterComponent } from './pokemon-filter/pokemon-filter.component';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PokeCardComponent } from './pokemon/poke-card.component';
@@ -14,8 +14,9 @@ import { PokemonProfileComponent } from './profile/pokemon-profile.component';
     PokeCardComponent,
     PokemonFilterComponent,
     PokemonProfileComponent,
+    PokemonChartComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
-  exports: [PokedexListComponent, PokeCardComponent, PokemonRoutingModule],
+  imports: [CommonModule, FormsModule, PokemonRoutingModule],
+  exports: [],
 })
 export class PokemonModule {}
