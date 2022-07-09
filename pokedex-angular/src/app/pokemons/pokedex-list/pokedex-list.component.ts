@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { pokemonColorMap } from 'src/app/utils/mock-data';
 import { Pokemon } from 'src/app/utils/types';
 import { PokemonService } from '../pokemon.service';
@@ -16,30 +17,26 @@ export class PokedexListComponent implements OnInit {
   @Input()
   search = '';
 
-  constructor(private pokemonService: PokemonService) {}
+  constructor(
+    private pokemonService: PokemonService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.retrievePokemons();
-  }
-
-  retrievePokemons() {
-    this.pokemonService
-      .getPokemonList(this.offset, this.limit)
-      .subscribe((data: { results: Pokemon[] }) => {
-        this.myPokedex = [...this.myPokedex, ...data.results];
-        this.displayPokedex = this.updatePokedex(data);
-      });
+    this.myPokedex = this.router.snapshot.data['pokemons'].results;
+    this.displayPokedex = this.myPokedex.map(this.updatePokedex, this);
+    this.displayPokedex = this.displayPokedex;
     this.offset += this.limit;
   }
 
-  updatePokedex(data: { results: Pokemon[] }) {
-    return data.results.map((pokemon, index) => {
-      const realIndex: number = index + 1;
-      pokemon.id = this.pokemonService.getPokemonIdByUrl(pokemon.url);
-      pokemon.image = this.pokemonService.getPokemonImageUri(pokemon.id);
-      pokemon.color = pokemonColorMap[realIndex];
-      return pokemon;
-    });
+  updatePokedex(pokemon: { name: string; url: string }): Pokemon {
+    const id = this.pokemonService.getPokemonIdByUrl(pokemon.url);
+    return {
+      id: id,
+      ...pokemon,
+      image: this.pokemonService.getPokemonImageUri(id),
+      color: pokemonColorMap[id],
+    };
   }
 
   filterPokedex(event: any) {
