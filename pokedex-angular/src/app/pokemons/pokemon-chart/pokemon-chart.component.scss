@@ -1,0 +1,37 @@
+.stats {
+  background-color: cornflowerblue;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  h3 {
+    text-align: center;
+  }
+  .graphic {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    align-content: center;
+    white-space: pre-wrap;
+    .category {
+      width: min-content;
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      align-items: center;
+      .points {
+        background-color: lightslategray;
+        align-content: flex-end;
+      }
+      p {
+        display: flex;
+        text-transform: capitalize;
+        text-align: center;
+        font-size: smaller;
+      }
+    }
+  }
+}
