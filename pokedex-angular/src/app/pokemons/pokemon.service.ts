@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Pokemon, PokemonApi } from '../utils/types';
-import { pokemonColorMap } from '../utils/mock-data';
+import { lastValueFrom, Observable } from 'rxjs';
+import { Pokemon, PokemonApi, PokemonSpecies } from '../utils/types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +17,8 @@ export class PokemonService {
     ) as Observable<{ results: Pokemon[] }>;
   }
 
-  getPokemonInformation(url: string) {
-    return this.http.get(url) as Observable<PokemonApi>;
+  getPokemonInformation(id: string) {
+    return this.http.get(`${this.api}/pokemon/${id}`) as Observable<PokemonApi>;
   }
 
   getPokemonImageUri(id: number) {
@@ -33,5 +32,9 @@ export class PokemonService {
 
   getPokemonIdByUrl(url: string) {
     return Number(url.split('/')[6]);
+  }
+
+  getPokemonSpecies(url: string) {
+    return lastValueFrom(this.http.get(url)) as Promise<PokemonSpecies>;
   }
 }
