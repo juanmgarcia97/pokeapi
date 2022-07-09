@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Pokemon, PokemonApi } from 'src/app/utils/types';
+import { ActivatedRoute, Navigation, Router } from '@angular/router';
+import { Pokemon, PokemonApi, PokemonSpecies } from 'src/app/utils/types';
 import { PokemonService } from '../pokemon.service';
 
 @Component({
@@ -10,28 +10,33 @@ import { PokemonService } from '../pokemon.service';
   styleUrls: ['./pokemon-profile.component.scss'],
 })
 export class PokemonProfileComponent implements OnInit {
-  pokemon!: Pokemon;
+  @Input() pokemon!: Pokemon;
   pokemonProfile!: PokemonApi;
+  pokemonSpecies!: PokemonSpecies;
   constructor(
     private location: Location,
     private route: ActivatedRoute,
+    private router: Router,
     private pokemonService: PokemonService
-  ) {}
+  ) {
+    const nav = router.getCurrentNavigation() as Navigation;
+    if (nav.extras.state) {
+      this.pokemon = nav.extras.state['pokemon'] as Pokemon;
+    }
+  }
 
   ngOnInit(): void {
-    this.route.url.subscribe(
-      (data) => (this.pokemon = data[1].parameters as unknown as Pokemon)
-    );
+    this.pokemonProfile = this.route.snapshot.data['pokemon'];
     this.pokemonService
-      .getPokemonInformation(this.pokemon.url)
-      .subscribe((data) => (this.pokemonProfile = data));
+      .getPokemonSpecies(this.pokemonProfile.species.url)
+      .then((data) => (this.pokemonSpecies = data));
   }
 
   goBack() {
     this.location.back();
   }
 
-  getNumber(id: number) {
+  getFormattedNumber(id: number) {
     return this.pokemonService.getPokemonNumber(id);
   }
 }

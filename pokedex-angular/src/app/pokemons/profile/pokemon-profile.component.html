@@ -1,21 +1,32 @@
 <div class="poke-profile">
-  <h1>{{pokemonProfile.name + ' N.°' + getNumber(pokemonProfile.id)}}</h1>
-  <div class="container" [ngStyle]="{'background-color': pokemon.color}">
-    <div class="image">
+  <h1>{{pokemonProfile.name + ' N.°' + getFormattedNumber(pokemonProfile.id)}}</h1>
+  <div class="wrapper" [ngStyle]="{'background-color': pokemon.color}">
+    <p> {{pokemonSpecies.flavor_text_entries[0].flavor_text}} </p>
+    <div class="container">
       <img [src]="pokemon.image">
-    </div>
-    <div class="basic-info">
-      <div class="info">
-        <h3>Height:</h3>
-        <p>{{ pokemonProfile.height }}</p>
-      </div>
-      <div class="info">
-        <h3>Type:</h3>
-        <div *ngFor="let type of pokemonProfile.types">
-          <p>{{ type.type.name }}</p>
+      <div class="basic-info">
+        <div class="info">
+          <h3>Height:</h3>
+          <p>{{ (pokemonProfile.height / 10) + ' m' }}</p>
+        </div>
+        <div class="info">
+          <h3>Weight:</h3>
+          <p> {{ pokemonProfile.weight + ' kg' }} </p>
+        </div>
+        <div class="info">
+          <h3>Type:</h3>
+          <div *ngFor="let type of pokemonProfile.types">
+            <p style="
+            text-transform: capitalize;
+            background-color: lightslategray;
+            padding: 3px;
+            border-radius: 3px;
+            ">{{ type.type.name }}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <app-poke-chart [stats]="pokemonProfile.stats"></app-poke-chart>
   <button (click)="goBack()">Return to Pokédex</button>
 </div>

@@ -3,7 +3,16 @@
     text-align: center;
     text-transform: capitalize;
   }
+  .wrapper {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    p {
+      text-align: center;
+    }
+  }
   .container {
+    border-radius: 5px;
     display: flex;
     justify-content: space-evenly;
   }
@@ -16,6 +25,10 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
+    background-color: lightgrey;
+    border-radius: 5px;
+    margin: 2rem 0;
+    padding: 0 2rem;
     gap: 5px;
     .info {
       gap: 5px;
