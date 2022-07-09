@@ -14,7 +14,9 @@ export class PokeCardComponent {
   pokemon!: Pokemon;
 
   goToPokemonProfile() {
-    this.router.navigate([`/pokedex/${this.pokemon.id}`, this.pokemon]);
+    this.router.navigate([`/pokedex/${this.pokemon.id}`], {
+      state: { pokemon: this.pokemon },
+    });
   }
 
   getNumber(id: number) {
