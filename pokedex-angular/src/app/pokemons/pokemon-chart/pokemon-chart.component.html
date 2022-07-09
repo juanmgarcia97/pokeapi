@@ -3,7 +3,9 @@
   <div class="graphic">
     <div class="category" *ngFor="let stat of stats">
       <div class="points" [ngStyle]="{'height': '200px', 'width': '3rem'}">
-        <div [ngStyle]="{'background-color': 'white', 'height': 200 - stat.base_stat + 'px', 'width': '3rem'}"></div>
+        <div
+          [ngStyle]="{'background-color': 'white', 'height': 200 - stat.base_stat + 'px', 'width': '3rem', 'border-radius': '3px 3px 0 0'}">
+        </div>
       </div>
       <p> {{ stat.stat.name.replace('-', ' ') }} </p>
     </div>
