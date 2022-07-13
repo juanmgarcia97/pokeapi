@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, lastValueFrom, map, Observable } from 'rxjs';
-import { Pokemon, PokemonApi, PokemonSpecies } from '../utils/types';
+import {
+  Pokemon,
+  PokemonApi,
+  PokemonDetailsApi,
+  PokemonSpecies,
+} from '../utils/types';
 import { pokemonColorMap } from '../utils/mock-data';
 
 @Injectable({
@@ -13,9 +18,24 @@ export class PokemonService {
   constructor(private http: HttpClient) {}
 
   getPokemonList(offset: number, limit: number) {
-    return this.http.get(
-      `${this.api}/pokemon?limit=${limit}&offset=${offset}`
-    ) as Observable<{ results: Pokemon[] }>;
+    return this.http
+      .get<{ results: PokemonDetailsApi[] }>(
+        `${this.api}/pokemon?limit=${limit}&offset=${offset}`
+      )
+      .pipe(
+        map((results) => {
+          return results.results.map((pokemon: PokemonDetailsApi) => {
+            const id = this.getPokemonIdByUrl(pokemon.url);
+            return {
+              id: id,
+              name: pokemon.name,
+              image: this.getPokemonImageUri(id),
+              url: pokemon.url,
+              color: pokemonColorMap[id],
+            };
+          });
+        })
+      );
   }
 
   getPokemonInformation(id: string) {

@@ -6,7 +6,7 @@ import { PokemonService } from '../pokemon.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PokemonsResolver implements Resolve<{ results: Pokemon[] }> {
+export class PokemonsResolver implements Resolve<Pokemon[]> {
   constructor(private pokemonService: PokemonService) {}
 
   resolve() {

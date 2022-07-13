@@ -6,6 +6,11 @@ export type Pokemon = {
   color: string;
 };
 
+export type PokemonDetailsApi = {
+  name: string;
+  url: string;
+};
+
 export type PokemonApi = {
   abilities: any[];
   base_experience: number;
@@ -25,6 +30,9 @@ export type PokemonApi = {
   stats: Stat[];
   types: any[];
   weight: number;
+  color: string;
+  image: string;
+  description: any[];
 };
 
 export type Stat = {
@@ -67,6 +75,9 @@ export type PokemonSpecies = {
 
 export type FlavorText = {
   flavor_text: string;
-  language: {};
+  language: {
+    name: string;
+    url: string;
+  };
   version: {};
 };

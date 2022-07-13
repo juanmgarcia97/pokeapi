@@ -1,8 +1,8 @@
 <div class="main">
   <div class="actions">
     <app-pokemon-filter (filter)="filterPokedex($event)"></app-pokemon-filter>
-    <input type="number" [(ngModel)]="offset" (blur)="ngOnInit()">
-    <button class="paginator">Next &plus;</button>
+    <input type="number" [(ngModel)]="offset">
+    <button class="paginator" (click)="paginator()">Next &plus;</button>
   </div>
   <div class="pokedex-list">
     <ng-template [ngIf]="displayPokedex.length > 0" [ngIfElse]="no_items">

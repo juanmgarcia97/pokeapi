@@ -23,20 +23,19 @@ export class PokedexListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.myPokedex = this.router.snapshot.data['pokemons'].results;
-    this.displayPokedex = this.myPokedex.map(this.updatePokedex, this);
-    this.displayPokedex = this.displayPokedex;
+    this.myPokedex = this.router.snapshot.data['pokemons'];
+    this.displayPokedex = this.myPokedex;
     this.offset += this.limit;
   }
 
-  updatePokedex(pokemon: { name: string; url: string }): Pokemon {
-    const id = this.pokemonService.getPokemonIdByUrl(pokemon.url);
-    return {
-      id: id,
-      ...pokemon,
-      image: this.pokemonService.getPokemonImageUri(id),
-      color: pokemonColorMap[id],
-    };
+  paginator() {
+    this.pokemonService
+      .getPokemonList(this.offset, this.limit)
+      .subscribe((data) => {
+        this.myPokedex = data;
+        this.displayPokedex = this.myPokedex;
+      });
+    this.offset += this.limit;
   }
 
   filterPokedex(event: any) {
