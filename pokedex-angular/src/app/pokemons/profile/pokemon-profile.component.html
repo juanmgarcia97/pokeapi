@@ -1,9 +1,8 @@
 <div class="poke-profile">
   <h1>{{pokemonProfile.name + ' N.°' + getFormattedNumber(pokemonProfile.id)}}</h1>
-  <div class="wrapper" [ngStyle]="{'background-color': pokemon.color}">
-    <p> {{pokemonSpecies.flavor_text_entries[0].flavor_text}} </p>
+  <div class="wrapper" [ngStyle]="{'background-color': pokemonProfile.color}">
     <div class="container">
-      <img [src]="pokemon.image">
+      <img [src]="pokemonProfile.image">
       <div class="basic-info">
         <div class="info">
           <h3>Height:</h3>
@@ -16,15 +15,13 @@
         <div class="info">
           <h3>Type:</h3>
           <div *ngFor="let type of pokemonProfile.types">
-            <p style="
-            text-transform: capitalize;
-            background-color: lightslategray;
-            padding: 3px;
-            border-radius: 3px;
-            ">{{ type.type.name }}</p>
+            <p class="type">{{ type.type.name }}</p>
           </div>
         </div>
       </div>
+    </div>
+    <div class="description">
+      <p> {{pokemonProfile.description.slice(0, 5)}} </p>
     </div>
   </div>
   <app-poke-chart [stats]="pokemonProfile.stats"></app-poke-chart>
