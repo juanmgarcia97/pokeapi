@@ -1,7 +1,14 @@
 .header {
   min-height: 100px;
   margin: 0.5rem 0;
-  .divider {
-    border-top: 1.5px solid black;
-  }
+  display: flex;
+  justify-content: space-around;
+}
+.actions  {
+  width: fit-content;
+  align-content: center;
+  gap: 2rem;
+}
+.divider {
+  border-top: 1.5px solid black;
 }
