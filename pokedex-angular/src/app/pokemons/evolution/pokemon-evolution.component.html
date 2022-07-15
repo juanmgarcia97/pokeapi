@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Evolutions</h2>
+  <div class="evolution">
+    <div class="evolution-card" *ngFor="let evolution of evolutionsData">
+      <div class="image-container" (click)="goToPokemonProfile()">
+        <img [src]="evolution.image">
+      </div>
+      <p style="text-transform: capitalize;">{{ evolution.species_name }}</p>
+      <div class="details">
+        <div class="info">
+          <span>Evolution trigger: <p>{{ evolution.trigger_name ?? 'No have to' }}</p></span>
+        </div>
+        <div class="info">
+          <span>Minimum level: <p>{{ evolution.min_level ?? 'No level' }}</p></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
