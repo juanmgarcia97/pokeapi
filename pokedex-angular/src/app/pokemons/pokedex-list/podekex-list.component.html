@@ -3,6 +3,12 @@
     <app-pokemon-filter (filter)="filterPokedex($event)"></app-pokemon-filter>
     <input type="number" [(ngModel)]="offset">
     <button class="paginator" (click)="paginator()">Next &plus;</button>
+    <select [(ngModel)]="generationSelected" (ngModelChange)="getPokemonGeneration()">
+      <option disabled>Choose one generation</option>
+      <option *ngFor="let generation of pokemonGenerations" [value]="generation.value">
+        {{generation.name}}
+      </option>
+    </select>
   </div>
   <div class="pokedex-list">
     <ng-template [ngIf]="displayPokedex.length > 0" [ngIfElse]="no_items">
