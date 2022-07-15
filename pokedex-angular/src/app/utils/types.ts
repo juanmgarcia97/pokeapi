@@ -1,7 +1,6 @@
 export type Pokemon = {
   id: number;
   name: string;
-  url: string;
   image: string;
   color: string;
 };
@@ -47,10 +46,10 @@ export type Stat = {
 export type PokemonSpecies = {
   base_happiness: any;
   capture_rate: any;
-  color: {};
+  color: PokemonDetailsApi;
   egg_groups: [];
-  evolution_chain: any;
-  evolves_from_species: any;
+  evolution_chain: {url: string} | null;
+  evolves_from_species: PokemonDetailsApi | null;
   flavor_text_entries: FlavorText[];
   form_descriptions: [];
   forms_switchable: boolean;
@@ -73,6 +72,10 @@ export type PokemonSpecies = {
   varieties: [];
 };
 
+export interface PokemonSpeciesImage extends PokemonSpecies {
+  image?: string
+}
+
 export type FlavorText = {
   flavor_text: string;
   language: {
@@ -81,3 +84,27 @@ export type FlavorText = {
   };
   version: {};
 };
+
+export type PokemonGeneration = {
+  abilities: unknown[]
+  id: number
+  main_region: unknown
+  moves: unknown[]
+  name: string
+  pokemon_species: PokemonDetailsApi[]
+  types: unknown[]
+  version_groups: unknown[]
+}
+
+export type PokemonEvolution = {
+  baby_trigger_item: unknown
+  chain: PokemonEvolutionChain
+  id: number
+}
+
+export type PokemonEvolutionChain = {
+  evolution_details: any[]
+  evolves_to: PokemonEvolutionChain[]
+  is_baby: boolean
+  species: PokemonDetailsApi
+}
