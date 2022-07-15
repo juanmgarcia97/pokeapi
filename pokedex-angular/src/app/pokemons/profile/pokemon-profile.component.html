@@ -15,7 +15,7 @@
         <div class="info">
           <h3>Type:</h3>
           <div *ngFor="let type of pokemonProfile.types">
-            <p class="type">{{ type.type.name }}</p>
+            <p class="type" [ngStyle]="{'background-color': type.color}">{{ type.name }}</p>
           </div>
         </div>
       </div>
@@ -25,5 +25,6 @@
     </div>
   </div>
   <app-poke-chart [stats]="pokemonProfile.stats"></app-poke-chart>
+  <app-pokemon-evolution [evolution]="pokemonSpecies"></app-pokemon-evolution>
   <button (click)="goBack()">Return to Pokédex</button>
 </div>

@@ -1,11 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Navigation, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
-  FlavorText,
-  Pokemon,
-  PokemonApi,
-  PokemonSpecies,
+  PokemonApi, PokemonSpeciesImage,
 } from 'src/app/utils/types';
 import { PokemonService } from '../pokemon.service';
 
@@ -14,19 +11,16 @@ import { PokemonService } from '../pokemon.service';
   templateUrl: './pokemon-profile.component.html',
   styleUrls: ['./pokemon-profile.component.scss'],
 })
-export class PokemonProfileComponent implements OnInit {
-  @Input() pokemon!: Pokemon;
+export class PokemonProfileComponent {
   pokemonProfile!: PokemonApi;
+  pokemonSpecies!: PokemonSpeciesImage;
   constructor(
     private location: Location,
     private route: ActivatedRoute,
     private pokemonService: PokemonService
   ) {
     this.pokemonProfile = this.route.snapshot.data['pokemon'];
-  }
-
-  async ngOnInit() {
-    // await this.getDescription();
+    this.pokemonSpecies = this.route.snapshot.data['species'];
   }
 
   goBack() {

@@ -11,6 +11,10 @@
       max-width: 35rem;
       align-self: center;
       flex-wrap: wrap;
+      margin: 1rem;
+      background-color: lightgrey;
+      padding: 0 1rem;
+      border-radius: 5px;
       p {
         text-align: justify;
         text-overflow: ellipsis;
@@ -20,6 +24,7 @@
     }
   }
   .container {
+    margin: 1rem;
     border-radius: 5px;
     display: flex;
     justify-content: space-evenly;
@@ -44,9 +49,9 @@
     }
     .type {
       text-transform: capitalize;
-      background-color: lightslategray;
       padding: 3px;
       border-radius: 3px;
+      color: white;
     }
   }
 }
