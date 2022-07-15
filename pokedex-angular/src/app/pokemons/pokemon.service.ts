@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, lastValueFrom, map, Observable } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import {
-  Pokemon,
   PokemonApi,
   PokemonDetailsApi,
+  PokemonEvolution,
+  PokemonEvolutionChain,
+  PokemonGeneration,
   PokemonSpecies,
 } from '../utils/types';
-import { pokemonColorMap } from '../utils/mock-data';
+import {
+  pokemonTypeColorMap,
+  pokemonColorMap,
+} from '../utils/pokemonColorHash';
 
 @Injectable({
   providedIn: 'root',
@@ -23,31 +28,37 @@ export class PokemonService {
         `${this.api}/pokemon?limit=${limit}&offset=${offset}`
       )
       .pipe(
-        map((results) => {
-          return results.results.map((pokemon: PokemonDetailsApi) => {
+        map((data) => {
+          return data.results.map((pokemon: PokemonDetailsApi) => {
             const id = this.getPokemonIdByUrl(pokemon.url);
             return {
-              id: id,
+              id: Number(id),
               name: pokemon.name,
-              image: this.getPokemonImageUri(id),
-              url: pokemon.url,
+              image: this.getPokemonImageUri(Number(id)),
               color: pokemonColorMap[id],
             };
           });
         })
-      );
+      ) as Observable<PokemonApi[]>;
   }
 
   getPokemonInformation(id: string) {
     const species = this.getPokemonSpecies(id);
     const details = this.getPokemonDetails(id);
     return forkJoin([species, details]).pipe(
-      map((pokemon) => {
+      map(([species, details]) => {
         const updatedPokemon = {
-          ...pokemon[1],
-          description: this.getDescription(pokemon[0]),
+          ...details,
+          types: details.types.map((data) => {
+            return {
+              name: data.type.name,
+              color: pokemonTypeColorMap[data.type.name],
+            };
+          }),
+          evolution_chain: species.evolution_chain,
+          description: this.getDescription(species),
           image: this.getPokemonImageUri(Number(id)),
-          color: pokemonColorMap[Number(id)],
+          color: pokemonColorMap[id],
         };
         return updatedPokemon;
       })
@@ -56,14 +67,14 @@ export class PokemonService {
 
   getDescription(species: PokemonSpecies) {
     let description: Awaited<string[]> = [];
-    const replacedDescription = species.flavor_text_entries
+    species.flavor_text_entries
       .filter((description) => description.language.name === 'en')
       .map((description) =>
         description.flavor_text.replace('\n', ' ').replace('\f', ' ')
-      );
-    replacedDescription.forEach((des, index) => {
-      description[index] = des;
-    });
+      )
+      .forEach((des, index) => {
+        description[index] = des;
+      });
     return [...new Set(description)];
   }
 
@@ -81,16 +92,33 @@ export class PokemonService {
   }
 
   getPokemonIdByUrl(url: string) {
-    return Number(url.split('/')[6]);
+    return url.split('/').slice(-2, -1)[0];
   }
 
   getPokemonSpecies(id: string) {
-    return this.http.get(
-      `${this.api}/pokemon-species/${id}`
-    ) as Observable<PokemonSpecies>;
+    return this.http
+      .get<PokemonSpecies>(`${this.api}/pokemon-species/${id}`)
+      .pipe(
+        map((data) => {
+          return {
+            ...data,
+            image: this.getPokemonImageUri(data.id),
+          };
+        })
+      ) as Observable<PokemonSpecies>;
   }
 
-  getPokemonsByGeneration(generation: number) {
-    return this.http.get(`${this.api}/generation/${generation}`);
+  getPokemonsByGeneration(generation: string) {
+    return this.http.get<{ pokemon_species: PokemonDetailsApi[] }>(
+      `${this.api}/generation/${generation}`
+    ) as Observable<{ pokemon_species: PokemonDetailsApi[] }>;
+  }
+
+  getPokemonEvolutions(url: string) {
+    return this.http.get<{ chain: PokemonEvolutionChain }>(url).pipe(
+      catchError((error, data) => {
+        return of(null);
+      })
+    );
   }
 }
