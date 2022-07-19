@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { PokemonEvolutionChain, PokemonSpeciesImage } from 'src/app/utils/types';
 import { PokemonService } from '../pokemon.service';
 
@@ -12,6 +13,7 @@ export class PokemonEvolutionComponent implements OnInit {
   @Input() evolution!: PokemonSpeciesImage;
   pokemonEvolution!: PokemonEvolutionChain;
   evolutionsData: any = []
+  rightArrow = faAngleRight;
   constructor(private pokemonService: PokemonService, private router: Router) {}
 
   ngOnInit(): void {
@@ -35,7 +37,8 @@ export class PokemonEvolutionComponent implements OnInit {
         });
   }
 
-  goToPokemonProfile() {
-    this.router.navigate([`/pokedex/${this.evolution.id}`])
+  goToPokemonProfile(id: number) {
+    this.router.navigate([`/pokedex/${id}`])
+
   }
 }
