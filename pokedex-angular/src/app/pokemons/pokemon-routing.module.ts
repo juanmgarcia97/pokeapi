@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PokemonAddComponent } from './add/pokemon-add.component';
 import { PokemonEvolutionResolver } from './evolution/pokemon-evolution.resolver';
 import { PokedexListComponent } from './pokedex-list/pokedex-list.component';
 import { PokemonsResolver } from './pokedex-list/pokemons.resolver';
@@ -15,11 +16,15 @@ const routes: Routes = [
     },
   },
   {
+    path: 'add',
+    component: PokemonAddComponent,
+  },
+  {
     path: ':id',
     component: PokemonProfileComponent,
     resolve: {
       pokemon: PokemonResolver,
-      species: PokemonEvolutionResolver
+      species: PokemonEvolutionResolver,
     },
   },
 ];
