@@ -54,5 +54,22 @@ button {
   margin: 2rem 1rem;
   padding: 1rem 2rem;
   font-size: larger;
-  font-family: sans-serif;
+
+}
+input {
+  background-color: white;
+  border: 0.5px solid lightslategray;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  font-size: small;
+
+}
+
+select {
+  background-color: white;
+  border: 0.5px solid lightslategray;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  font-size: small;
+
 }

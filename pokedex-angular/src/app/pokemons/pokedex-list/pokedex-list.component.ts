@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { pokemonColorMap } from 'src/app/utils/mock-data';
 import { Pokemon, PokemonApi } from 'src/app/utils/types';
+import { PokemonAddComponent } from '../add/pokemon-add.component';
 import { PokemonService } from '../pokemon.service';
 import { generations } from './pokedex-list.generations';
 
@@ -20,27 +22,44 @@ export class PokedexListComponent implements OnInit {
   search = '';
   pokemonGenerations = generations;
   generationSelected = '0';
+  newPokemon: Pokemon = {
+    id: 0,
+    name: '',
+    image: '',
+    color: ''
+  }
 
   constructor(
     private pokemonService: PokemonService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
 
+  openDialog() {
+    const dialogRef = this.dialog.open(PokemonAddComponent, {
+      data: this.newPokemon
+    });
+    dialogRef.afterClosed().subscribe((data: Pokemon) => {
+      this.newPokemon = data
+      console.log(this.newPokemon);
+    })
+  }
+
   ngOnInit(): void {
-    this.myPokedex = this.router.snapshot.data['pokemons'];
-    this.displayPokedex = this.myPokedex;
-    this.offset += this.limit;
+    this.router.data.subscribe((data) => {
+      this.myPokedex = data['pokemons'];
+      this.displayPokedex = this.myPokedex;
+      this.offset += this.limit;
+    });
   }
 
   getPokemonGeneration() {
-    // this.pokemonService
-    //   .getPokemonsByGeneration(this.generationSelected)
-    //   .subscribe((pokemons) => {
-    //     console.log(pokemons.slice(0, 50));
-
-    //     this.myPokedex = [...this.myPokedex, ...pokemons];
-    //     this.displayPokedex = this.myPokedex;
-    //   });
+    this.pokemonService
+      .getPokemonsByGeneration(this.generationSelected)
+      .subscribe((pokemons) => {
+        this.myPokedex = pokemons.slice(0, 50);
+        this.displayPokedex = this.myPokedex;
+      });
   }
 
   paginator() {
