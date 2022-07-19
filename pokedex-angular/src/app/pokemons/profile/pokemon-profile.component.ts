@@ -19,12 +19,11 @@ export class PokemonProfileComponent {
     private route: ActivatedRoute,
     private pokemonService: PokemonService
   ) {
-    this.pokemonProfile = this.route.snapshot.data['pokemon'];
-    this.pokemonSpecies = this.route.snapshot.data['species'];
-  }
-
-  goBack() {
-    this.location.back();
+    // this.pokemonProfile = this.route.snapshot.data['pokemon'];
+    this.route.data.subscribe((data) => {
+      this.pokemonProfile = data['pokemon']
+      this.pokemonSpecies = data['species'];
+    })
   }
 
   getFormattedNumber(id: number) {
