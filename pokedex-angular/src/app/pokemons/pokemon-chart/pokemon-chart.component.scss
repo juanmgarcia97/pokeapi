@@ -1,12 +1,12 @@
 .stats {
-  background-color: cornflowerblue;
+  background-color: lightslategray;
   border-radius: 5px;
   padding: 1rem;
-  margin: 1rem 0;
   gap: 10px;
-  display: flex;
   flex-direction: column;
-  h3 {
+  color: white;
+  width: min-content;
+  h2 {
     text-align: center;
   }
   .graphic {
@@ -15,17 +15,14 @@
     gap: 5px;
     justify-content: center;
     align-content: center;
-    white-space: pre-wrap;
     .category {
-      width: min-content;
       display: flex;
       flex-direction: column;
       justify-items: center;
       align-items: center;
       .points {
         border-radius: 3px;
-        background-color: lightslategray;
-        align-content: flex-end;
+        background-color: cornflowerblue;
       }
       p {
         display: flex;

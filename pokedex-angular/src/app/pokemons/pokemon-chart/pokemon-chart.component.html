@@ -1,11 +1,12 @@
 <div class="stats">
-  <h3>Base points</h3>
+  <h2>Stats</h2>
   <div class="graphic">
     <div class="category" *ngFor="let stat of stats">
       <div class="points" [ngStyle]="{'height': '200px', 'width': '3rem'}">
         <div
           [ngStyle]="{'background-color': 'white', 'height': 200 - stat.base_stat + 'px', 'width': '3rem', 'border-radius': '3px 3px 0 0'}">
         </div>
+        <p style="color: white; margin: 0 !important; justify-content: center;">{{stat.base_stat}}</p>
       </div>
       <p> {{ stat.stat.name.replace('-', ' ') }} </p>
     </div>
