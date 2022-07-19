@@ -1,5 +1,5 @@
 <div class="pokemon" (click)="goToPokemonProfile()"
-  [ngStyle]="{'background-color': pokemon.color, 'color': pokemon.color.split('#')[1].startsWith('f') ? 'black' : 'white'}">
+  [ngStyle]="{'background-color': pokemon.color, 'color': getColor(pokemon.color)}">
   <img [src]="pokemon.image" />
   <p class="number">{{ 'N.°' + getNumber(pokemon.id) }}</p>
   <p class="name"> {{ pokemon.name }}

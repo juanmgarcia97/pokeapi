@@ -20,4 +20,8 @@ export class PokeCardComponent {
   getNumber(id: number) {
     return this.pokemonService.getPokemonNumber(id);
   }
+
+  getColor(color: string) {
+    return color.split('#')[1].startsWith('f') ? 'black' : 'white'
+  }
 }
