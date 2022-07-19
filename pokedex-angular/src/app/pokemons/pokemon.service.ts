@@ -111,7 +111,19 @@ export class PokemonService {
   getPokemonsByGeneration(generation: string) {
     return this.http.get<{ pokemon_species: PokemonDetailsApi[] }>(
       `${this.api}/generation/${generation}`
-    ) as Observable<{ pokemon_species: PokemonDetailsApi[] }>;
+    ).pipe(
+      map((data) => {
+        return data.pokemon_species.map((pokemon: PokemonDetailsApi) => {
+          const id = this.getPokemonIdByUrl(pokemon.url);
+          return {
+            id: Number(id),
+            name: pokemon.name,
+            image: this.getPokemonImageUri(Number(id)),
+            color: pokemonColorMap[id],
+          };
+        });
+      })
+    ) as Observable<PokemonApi[]>;
   }
 
   getPokemonEvolutions(url: string) {
