@@ -1,0 +1,13 @@
+.header {
+  min-height: 100px;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 2px 2px 2px 1px rgba(204, 224, 255, 0.2);
+  background-color: #CCE0FF;
+  border-bottom: 2px solid #7D92B3;
+}
+.actions  {
+  width: fit-content;
+  align-content: center;
+  gap: 2rem;
+}

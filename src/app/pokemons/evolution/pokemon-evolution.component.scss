@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: lightslategrey;
+  background: transparent
+    url(https://assets.pokemon.com/static2/_ui/img/chrome/body_gray_bg.png);
+  h2 {
+    text-align: center;
+  }
+  color: white;
+}
+
+.evolution {
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  .evolution-info {
+    img {
+      cursor: pointer;
+    }
+    display: flex;
+    flex-direction: column;
+    p {
+      text-align: left;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      font-size: medium;
+      .info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        text-transform: capitalize;
+      }
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+  .evolution-card {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.image-container {
+  border-radius: 100%;
+  border: 5px solid white;
+  background-color: gray;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.arrow {
+  align-self: center;
+  font-size: xxx-large;
+  margin: 1rem;
+}
+
+.wrapper {
+  display: flex;
+}
+.last-arrow {
+  display: none;
+}
