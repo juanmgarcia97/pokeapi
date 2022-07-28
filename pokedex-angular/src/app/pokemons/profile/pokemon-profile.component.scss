@@ -1,0 +1,80 @@
+.poke-profile {
+  button {
+    background-color: white;
+    border: 0.5px solid lightslategray;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 1rem 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: small;
+
+  }
+  h1 {
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .wrapper {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    .description {
+      max-width: 35rem;
+      align-self: center;
+      flex-wrap: wrap;
+      margin: 1rem;
+      background-color: lightgrey;
+      padding: 0 1rem;
+      border-radius: 5px;
+      p {
+        text-align: justify;
+        text-overflow: ellipsis;
+        white-space: wrap;
+        overflow: hidden;
+      }
+    }
+  }
+  .container {
+    margin: 1rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .basic-info {
+    h3, p {
+      margin: 0 !important;
+      align-self: center;
+    }
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    background-color: lightgrey;
+    border-radius: 5px;
+    margin: 2rem 0;
+    padding: 0 2rem;
+    gap: 5px;
+    .info {
+      gap: 5px;
+      display: flex;
+    }
+    .type {
+      text-transform: capitalize;
+      padding: 3px;
+      border-radius: 3px;
+      color: white;
+    }
+  }
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.evolution {
+  margin: 1rem 0;
+}

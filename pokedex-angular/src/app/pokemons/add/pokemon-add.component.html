@@ -1,0 +1,27 @@
+<div class="form-container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <h2>Add new pokemon</h2>
+    <div class="form-input">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label for="name">Name</mat-label>
+          <input id="name" type="text" formControlName="pokemonName" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label for="description">Description</mat-label>
+          <input id="description" formControlName="pokemonDescription" type="text" matInput
+            placeholder="Comes from the woods...">
+        </mat-form-field>
+      </div>
+      <div>
+        <input #fileInput hidden="true" type="file" onclick="this.value=null" formControlName="pokemonImage">
+        <button (click)="fileInput.click()">Upload pokemon image</button>
+        <mat-form-field>
+          <mat-label>Color</mat-label>
+          <input type="color" matInput formControlName="pokemonColor">
+        </mat-form-field>
+      </div>
+    </div>
+    <button type="submit">Add</button>
+  </form>
+</div>
