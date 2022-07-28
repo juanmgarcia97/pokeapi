@@ -1,7 +1,7 @@
 {
   "configVersion": 1,
-  "timestamp": 1658255095895,
-  "index": "/index.html",
+  "timestamp": 1659030364098,
+  "index": "/pokeapi/index.html",
   "assetGroups": [
     {
       "name": "app",
@@ -11,14 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "/699.09902beaab663d47.js",
-        "/favicon.ico",
-        "/index.html",
-        "/main.b0c6a585542d89fe.js",
-        "/manifest.webmanifest",
-        "/polyfills.fa6f98b6deae32c5.js",
-        "/runtime.16e1c8d173e8efe7.js",
-        "/styles.af496c625d1d99e8.css"
+        "/pokeapi/699.506e5884ba591172.js",
+        "/pokeapi/favicon.ico",
+        "/pokeapi/index.html",
+        "/pokeapi/main.09de4eece5fb1906.js",
+        "/pokeapi/manifest.webmanifest",
+        "/pokeapi/polyfills.fa6f98b6deae32c5.js",
+        "/pokeapi/runtime.7432196476216967.js",
+        "/pokeapi/styles.af496c625d1d99e8.css"
       ],
       "patterns": []
     },
@@ -30,36 +30,36 @@
         "ignoreVary": true
       },
       "urls": [
-        "/assets/icons/icon-128x128.png",
-        "/assets/icons/icon-144x144.png",
-        "/assets/icons/icon-152x152.png",
-        "/assets/icons/icon-192x192.png",
-        "/assets/icons/icon-384x384.png",
-        "/assets/icons/icon-512x512.png",
-        "/assets/icons/icon-72x72.png",
-        "/assets/icons/icon-96x96.png"
+        "/pokeapi/assets/icons/icon-128x128.png",
+        "/pokeapi/assets/icons/icon-144x144.png",
+        "/pokeapi/assets/icons/icon-152x152.png",
+        "/pokeapi/assets/icons/icon-192x192.png",
+        "/pokeapi/assets/icons/icon-384x384.png",
+        "/pokeapi/assets/icons/icon-512x512.png",
+        "/pokeapi/assets/icons/icon-72x72.png",
+        "/pokeapi/assets/icons/icon-96x96.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/699.09902beaab663d47.js": "310589c45451c3b2eb25faa4f5a57a6adb85d02e",
-    "/assets/icons/icon-128x128.png": "a73bca43c37ac26dbac5b33bee55529eef11d5fb",
-    "/assets/icons/icon-144x144.png": "e66a9b96f8474854dc0573321990b1288d15cab8",
-    "/assets/icons/icon-152x152.png": "5f00700d06f4b0908bd531d09645c2d681162107",
-    "/assets/icons/icon-192x192.png": "a8edca006d7a2634702068b2e76ab146adaf2c63",
-    "/assets/icons/icon-384x384.png": "f7777b99626b5ec48c93acff1ae495972b16b1d8",
-    "/assets/icons/icon-512x512.png": "fd05b659d7c94f6d99a0a765420f5d34a77912c9",
-    "/assets/icons/icon-72x72.png": "855cde3d9a466005d58f059e3c4f834eba412fb9",
-    "/assets/icons/icon-96x96.png": "a93762638ce278096e6001a768110a0bc930de24",
-    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "eaa8321e1d8444c7b72c9979944537604d792316",
-    "/main.b0c6a585542d89fe.js": "4e8c3ea91fd2cf70d3b61bd50c68a2c3a6c14aab",
-    "/manifest.webmanifest": "bc98aa3971270b72dab9fc3865a56003517c7f7a",
-    "/polyfills.fa6f98b6deae32c5.js": "7e041c36f4e5db1f974f093f0745a872df5133c7",
-    "/runtime.16e1c8d173e8efe7.js": "7e5ac49e1a504311f4bc87f83903f027113e2944",
-    "/styles.af496c625d1d99e8.css": "945674861bc3479df7e1738179073b58bdb93439"
+    "/pokeapi/699.506e5884ba591172.js": "d2594cc5d354e3b7c0914443731e2e25b0bf181e",
+    "/pokeapi/assets/icons/icon-128x128.png": "a73bca43c37ac26dbac5b33bee55529eef11d5fb",
+    "/pokeapi/assets/icons/icon-144x144.png": "e66a9b96f8474854dc0573321990b1288d15cab8",
+    "/pokeapi/assets/icons/icon-152x152.png": "5f00700d06f4b0908bd531d09645c2d681162107",
+    "/pokeapi/assets/icons/icon-192x192.png": "a8edca006d7a2634702068b2e76ab146adaf2c63",
+    "/pokeapi/assets/icons/icon-384x384.png": "f7777b99626b5ec48c93acff1ae495972b16b1d8",
+    "/pokeapi/assets/icons/icon-512x512.png": "fd05b659d7c94f6d99a0a765420f5d34a77912c9",
+    "/pokeapi/assets/icons/icon-72x72.png": "855cde3d9a466005d58f059e3c4f834eba412fb9",
+    "/pokeapi/assets/icons/icon-96x96.png": "a93762638ce278096e6001a768110a0bc930de24",
+    "/pokeapi/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/pokeapi/index.html": "3447b730da480fa0fd7dec56b63f336369cb7984",
+    "/pokeapi/main.09de4eece5fb1906.js": "698d21efd9ea6bfb7152f40c03e5577ad63c50f8",
+    "/pokeapi/manifest.webmanifest": "bc98aa3971270b72dab9fc3865a56003517c7f7a",
+    "/pokeapi/polyfills.fa6f98b6deae32c5.js": "7e041c36f4e5db1f974f093f0745a872df5133c7",
+    "/pokeapi/runtime.7432196476216967.js": "d65d74348a26320ff58a2dd3ac898b5db845b5cd",
+    "/pokeapi/styles.af496c625d1d99e8.css": "945674861bc3479df7e1738179073b58bdb93439"
   },
   "navigationUrls": [
     {
